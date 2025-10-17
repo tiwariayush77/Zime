@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "SalesFlowCanvas/server/index.ts", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "SalesFlowCanvas/server/index.ts" },
+    { "src": "/(.*)", "dest": "SalesFlowCanvas/server/index.ts" }
+  ]
+}
