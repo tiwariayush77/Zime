@@ -1,0 +1,257 @@
+<q>MASTER PROMPT FOR LOVABLE (COPY THIS EXACTLY)</q> check my master prompt - 
+Build a sales pipeline dashboard for a VP of Sales named Austin who manages 10 sales reps. This is Screen 1 - Deal Risk Dashboard.
+
+LAYOUT:
+- Header: "ZIME" logo on left, search bar in center, user profile "Austin (VP Sales)" on right
+- Below header: 3 summary cards in a row (High Risk, Medium Risk, Low Risk deals)
+- Main content: List of deal risk cards (show 3 cards for now)
+- Right sidebar: Team leaderboard table
+
+SUMMARY CARDS (3 cards, equal width):
+Card 1: High Risk
+- Large red number: "8 deals"
+- Subtitle: "$420K at risk"
+- Background: light red (#FEF2F2)
+
+Card 2: Medium Risk
+- Large yellow number: "15 deals"
+- Subtitle: "$780K needs attention"
+- Background: light yellow (#FFFBEB)
+
+Card 3: Low Risk
+- Large green number: "22 deals"
+- Subtitle: "$1.8M on track"
+- Background: light green (#F0FDF4)
+
+DEAL RISK CARDS (repeating component):
+Each card should have:
+- Header row: Deal name (bold) | $50K | Discovery stage | Rep: Sarah Johnson
+- Days in stage badge: "18 days in Discovery" (gray background)
+- Risk score badge: Large "85/100" in red circle
+- "Root Causes Identified:" label
+- 3 bullet points (red X icons):
+  • No economic buyer identified (40% lower win rate when skipped)
+  • Last activity 7 days ago
+  • Rep skipped budget qualification Action
+- "Recommended Action:" label
+- Yellow box: "Schedule multi-threading call with CFO by Friday"
+- 3 buttons: "View Call" (blue) | "Coach Rep" (gray) | "Mark Safe" (gray outline)
+
+TEAM LEADERBOARD (right sidebar):
+- Title: "Team Performance"
+- Table with 5 columns: Rank | Name | Adoption % | Avg Score | Win Rate
+- Show 5 rows of sample data
+- Sortable column headers
+
+DESIGN:
+- Use Tailwind CSS
+- Modern, clean design similar to Linear or Notion
+- White background, subtle shadows on cards
+- Inter or SF Pro font
+- Spacing: generous padding between cards (24px)
+
+DATA:
+Create mock data for 3 deal cards with different risk levels (85, 72, 45)
+
+Build Screen 2 - Rep Performance Scorecard. This is accessed when Austin clicks on a rep's name.
+
+LAYOUT:
+- Back button (← Dashboard) at top left
+- Rep header section with metrics
+- Action breakdown section
+- Coaching opportunity card
+- Recent calls table
+
+REP HEADER:
+- Rep photo (circular, 80px) on left
+- Rep name: "Sarah Johnson" (large, bold)
+- Below name: 6 metric cards in 2 rows of 3
+
+METRIC CARDS (small cards, 3 per row):
+Card 1: Playbook Adoption
+- Large number: "92%"
+- Trend arrow: ↑ +15%
+- Label: "Last 30 days"
+
+Card 2: Avg Call Score
+- Large number: "8.5/10"
+- Trend arrow: ↑ +1.2
+- Label: "Last 30 days"
+
+Card 3: Win Rate
+- Large number: "35%"
+- Trend arrow: → +0%
+- Label: "Last quarter"
+
+Card 4: Active Deals
+- Large number: "12"
+- Trend arrow: ↑ +3
+- Label: "This month"
+
+Card 5: Pipeline Value
+- Large number: "$540K"
+- Trend arrow: ↑ +$120K
+- Label: "Open opportunities"
+
+Card 6: Avg Deal Size
+- Large number: "$45K"
+- Trend arrow: ↓ -$5K
+- Label: "Last 30 days"
+
+ACTION BREAKDOWN:
+- Title: "Playbook Adoption by Stage"
+- 3 sections (Discovery, Demo, Negotiation)
+- Each section has 3 actions with progress bars:
+  Example for Discovery:
+  • Ask about current pain point: [95% green progress bar]
+  • Identify decision-makers: [60% orange progress bar]
+  • Ask about budget: [40% red progress bar]
+
+COACHING OPPORTUNITY (highlighted card):
+- Yellow border, light yellow background
+- Icon: 💡
+- Title: "Opportunity Identified"
+- Text: "Sarah skips budget qualification in 60% of discovery calls. Top reps who ask about budget in the first call have 40% higher win rates."
+- Suggested Actions (2 bullet points):
+  • Share call recording from top rep John (Deal: Acme Corp, 10/12)
+  • Add budget qualification to Sarah's next 3 pre-call checklists
+- Button: "Create Coaching Task" (blue)
+
+RECENT CALLS TABLE:
+- Title: "Recent Calls"
+- 4 columns: Date | Deal Name | Score | Actions Completed
+- Show 5 rows
+- Click on row highlights it
+
+DESIGN:
+- Same design system as Screen 1
+- Use color coding: Green >80%, Orange 60-80%, Red <60%
+
+Build Screen 3 - Call Analysis Detail. This is accessed when Austin clicks "View Call" on a deal card.
+
+LAYOUT:
+- Back button (← Rep Scorecard) at top left
+- Call header with metadata
+- 3 tabs: Transcript | Actions | Insights (default to Transcript tab)
+- Two-column layout: Left (Transcript) | Right (Actions Checklist + Coaching)
+- Bottom section: AI Insights cards + Follow-up email
+
+CALL HEADER:
+- Deal name: "Acme Corp - Discovery Call"
+- Metadata row: Oct 16, 2025 | 42 mins | Participants: Sarah Johnson, John Smith (Buyer) | Score: 7/10
+
+TRANSCRIPT PANEL (Left column, scrollable):
+- Timestamp + speaker labels
+- Example entries:
+  [00:02] Sarah: Hi John, thanks for taking the time today...
+  [08:15] John: We're currently using Stripe for payments...
+  [28:30] John: Pricing is a concern for us...
+
+ACTIONS CHECKLIST (Right column, top):
+- Title: "Playbook Actions"
+- List of actions with status:
+  ✅ Asked about current pain point
+  ✅ Identified decision-makers
+  ❌ Did NOT ask about budget (40% lower win rate when skipped)
+  ✅ Mentioned case study
+  ❌ Did NOT ask about timeline
+
+COACHING TIP (Right column, below checklist):
+- Orange border card
+- Title: "🎯 Coaching Opportunity"
+- Text: "At 28:30 when John mentioned 'pricing is a concern,' Sarah should have asked: 'What's your budget range for this project?' This question helps qualify the deal early."
+- Link: "▶ Watch how top rep handles this (Deal: TechCorp, 15:22)"
+
+AI INSIGHTS (Bottom section, 4 cards in a row):
+
+Card 1: Sentiment Analysis
+- Icon: 😊
+- Score: "+0.7 (Positive)"
+- Note: "Buyer engaged, asked follow-up questions"
+
+Card 2: Objections Raised
+- Icon: ⚠️
+- Count: 2
+- List: "Pricing concern, Integration complexity"
+
+Card 3: Competitors Mentioned
+- Icon: 🏆
+- Count: 1
+- Text: "Stripe (current provider)"
+
+Card 4: Key Stakeholders
+- Icon: 👥
+- List: "John Smith (Champion), CFO mentioned but not on call"
+
+FOLLOW-UP EMAIL (Bottom):
+- Title: "AI-Generated Follow-Up Email"
+- Textarea with pre-filled email:
+  "Hi John,
+  
+  Thanks for the great conversation today. Based on our discussion, I understand your main pain points are [X] and [Y]. I've attached a case study showing how [similar company] solved this.
+  
+  Next steps:
+  - I'll send over pricing options by Thursday
+  - Let's schedule a demo with your CFO next week
+  
+  Best,
+  Sarah"
+- 3 buttons: Copy | Edit | Send via Salesforce
+
+DESIGN:
+- Same design system
+- Transcript in light gray background
+- Actions checklist: green checkmarks, red X icons
+- AI insights cards: colorful icons, white background
+
+Build Screen 4 - Team Playbook Adoption Tracker.
+
+LAYOUT:
+- Back button (← Dashboard)
+- Title: "Team Playbook Adoption Trends"
+- Adoption trend section (use a static chart image for now)
+- Action breakdown by stage (3 tables)
+- Coaching priorities list
+
+ADOPTION TREND:
+- Text: "Playbook Adoption - Last 4 Weeks"
+- [For now, just leave a placeholder box with text: "Chart showing rep adoption trends over time"]
+- Note: "Sarah: 77% → 92% (+15%) | John: 88% → 91% (+3%) | Mike: 65% → 74% (+9%)"
+
+ACTION BREAKDOWN (3 tables):
+
+Table 1: Discovery Stage Actions
+- 4 columns: Action | Team Avg | Completion Rate | Impact on Win Rate
+- 3 rows:
+  Ask about pain point | 88% | [green bar] | +12% win rate
+  Identify decision-makers | 72% | [orange bar] | +8% win rate
+  Ask about budget | 54% | [red bar] | +18% win rate
+
+Table 2: Demo Stage Actions
+- Same structure, different actions
+
+Table 3: Negotiation Stage Actions
+- Same structure, different actions
+
+COACHING PRIORITIES:
+- Title: "Top Coaching Opportunities (Ranked by Impact)"
+- Numbered list (3 items):
+  1. Budget Qualification (Discovery)
+     → 46% of reps skip this action
+     → Skipping reduces win rate by 18%
+     → Affects: Sarah, Mike, Jessica
+
+  2. Multi-threading (Demo)
+     → 38% of reps don't involve additional stakeholders
+     → Reduces win rate by 12%
+     → Affects: John, Mike
+
+  3. ROI Calculator (Negotiation)
+     → 31% of reps don't share ROI analysis
+     → Reduces win rate by 9%
+     → Affects: Sarah, Jessica
+
+DESIGN:
+- Same design system
+- Tables: striped rows, sortable headers
+- Progress bars in tables color-coded (green/orange/red)
