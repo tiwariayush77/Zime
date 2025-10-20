@@ -1,0 +1,3357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Zime AI Case Study - Complete Presentation (Slides 1-13)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<style>
+  /* === BASE STYLES === */
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body{ 
+    font-family:'Poppins',sans-serif; 
+    background: linear-gradient(135deg, #F5EFE6 0%, #F8EDD8 25%, #FAE5CA 50%, #FDDFC2 75%, #FFD9B3 100%);
+    min-height:100vh;
+    padding:40px 20px 100px 20px;
+  }
+
+  /* FIX 1: CSS variables for separator control */
+  :root{
+    --slide-gap: 180px;
+    --sep-width: 900px;
+    --sep-thickness: 6px;
+    --sep-offset: calc(-0.5 * var(--slide-gap));
+  }
+
+  .presentation-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--slide-gap);
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .slide{
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    background: transparent;
+  }
+
+  /* FIX 1: Separator positioned midway in gap */
+  .slide:not(:last-child)::after{
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: var(--sep-offset);
+    transform: translateX(-50%);
+    width: var(--sep-width);
+    height: var(--sep-thickness);
+    background: linear-gradient(
+      to right,
+      rgba(44,62,80,0) 0%,
+      rgba(44,62,80,0.22) 20%,
+      rgba(44,62,80,0.35) 50%,
+      rgba(44,62,80,0.22) 80%,
+      rgba(44,62,80,0) 100%
+    );
+    border-radius: 3px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    z-index: 10;
+  }
+
+
+  /* === STYLES FROM SLIDE 1 (with FIXES) === */
+/* NO BORDER for title slide */
+  .slide{ 
+    width:1280px; 
+    height:720px; 
+    padding:30px 40px;
+    display:flex;
+    flex-direction:column;
+  }
+  
+  /* Header */
+  .header{
+    text-align:center;
+    margin-bottom:20px;
+  }
+  .header h1{ 
+    font-size:50px; 
+    font-weight:800; 
+    color:#2C3E50; 
+    margin:0 0 8px 0; 
+    line-height:1.1;
+    letter-spacing:-0.5px;
+  }
+  .header h2{ 
+    font-size:18px; 
+    font-weight:500; 
+    color:#5A6C7D; 
+    margin:0;
+  }
+  
+  /* Browser Window */
+  .browser-container{
+    flex:1;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  
+  .browser-window{
+    width:100%;
+    max-width:1100px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.25);
+    overflow:hidden;
+  }
+  
+  .browser-chrome{
+    background:#f5f5f5;
+    height:38px;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    border-bottom:1px solid #ddd;
+  }
+  
+  .browser-dots{
+    display:flex;
+    gap:8px;
+    margin-right:20px;
+  }
+  
+  .dot{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+  }
+  
+  .dot.red{ background:#FF5F56; }
+  .dot.yellow{ background:#FFBD2E; }
+  .dot.green{ background:#27C93F; }
+  
+  .browser-url{
+    flex:1;
+    background:#fff;
+    border-radius:6px;
+    padding:5px 12px;
+    font-size:12px;
+    color:#666;
+    border:1px solid #ddd;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  
+  .lock-icon{ color:#22c55e; font-size:14px; }
+  
+  .live-badge{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    background:#f0fdf4;
+    color:#166534;
+    padding:4px 10px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:700;
+    border:1px solid #dcfce7;
+  }
+  
+  .live-dot{
+    width:6px;
+    height:6px;
+    background:#22c55e;
+    border-radius:50%;
+    animation:pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse{
+    0%, 100%{ opacity:1; }
+    50%{ opacity:0.5; }
+  }
+  
+  /* Dashboard Content - SAME AS BEFORE */
+  .dashboard{
+    background:#f9fafb;
+    height:575px;
+    overflow:hidden;
+    font-family:'Inter',sans-serif;
+  }
+  
+  .dash-header{
+    background:#fff;
+    padding:12px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid #e5e7eb;
+  }
+  
+  .dash-logo{
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  
+  .dash-logo img{
+    height:24px;
+  }
+  
+  .dash-search{
+    flex:1;
+    max-width:350px;
+    margin:0 20px;
+    position:relative;
+  }
+  
+  .dash-search input{
+    width:100%;
+    padding:7px 12px 7px 32px;
+    border:1px solid #e5e7eb;
+    border-radius:6px;
+    background:#f9fafb;
+    font-size:12px;
+    font-family:'Inter',sans-serif;
+  }
+  
+  .search-icon{
+    position:absolute;
+    left:10px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#9ca3af;
+    font-size:14px;
+  }
+  
+  .dash-actions{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-size:11px;
+  }
+  
+  .status{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    color:#6b7280;
+  }
+  
+  .status-dot{
+    width:6px;
+    height:6px;
+    background:#22c55e;
+    border-radius:50%;
+  }
+  
+  .export-btn{
+    color:#6b7280;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  
+  .avatar{
+    width:30px;
+    height:30px;
+    background:#3b82f6;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:11px;
+    font-weight:700;
+  }
+  
+  .dash-nav{
+    background:#fff;
+    padding:0 20px;
+    display:flex;
+    gap:24px;
+    border-bottom:2px solid #e5e7eb;
+  }
+  
+  .nav-item{
+    padding:12px 0;
+    font-size:12px;
+    font-weight:600;
+    color:#6b7280;
+    position:relative;
+    cursor:pointer;
+  }
+  
+  .nav-item.active{
+    color:#3b82f6;
+  }
+  
+  .nav-item.active:after{
+    content:'';
+    position:absolute;
+    bottom:-2px;
+    left:0;
+    right:0;
+    height:2px;
+    background:#3b82f6;
+  }
+  
+  .dash-content{
+    padding:16px 20px;
+  }
+  
+  .risk-cards{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:14px;
+    margin-bottom:16px;
+  }
+  
+  .risk-card{
+    padding:16px;
+    border-radius:12px;
+    position:relative;
+    display:flex;
+    flex-direction:column;
+  }
+  
+  .risk-card.high{
+    background:#fee2e2;
+    border:1px solid #fecaca;
+  }
+  
+  .risk-card.medium{
+    background:#fef3c7;
+    border:1px solid #fde68a;
+  }
+  
+  .risk-card.low{
+    background:#dcfce7;
+    border:1px solid #bbf7d0;
+  }
+  
+  .risk-icon{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:24px;
+    height:24px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:14px;
+  }
+  
+  .risk-card.high .risk-icon{
+    background:#fee2e2;
+    color:#dc2626;
+  }
+  
+  .risk-card.medium .risk-icon{
+    background:#fef3c7;
+    color:#f59e0b;
+  }
+  
+  .risk-card.low .risk-icon{
+    background:#dcfce7;
+    color:#22c55e;
+  }
+  
+  .risk-label{
+    font-size:10px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+    margin-bottom:8px;
+  }
+  
+  .risk-card.high .risk-label{ color:#991b1b; }
+  .risk-card.medium .risk-label{ color:#92400e; }
+  .risk-card.low .risk-label{ color:#166534; }
+  
+  .risk-count{
+    font-size:26px;
+    font-weight:700;
+    margin-bottom:4px;
+  }
+  
+  .risk-card.high .risk-count{ color:#7f1d1d; }
+  .risk-card.medium .risk-count{ color:#78350f; }
+  .risk-card.low .risk-count{ color:#14532d; }
+  
+  .risk-amount{
+    font-size:11px;
+    font-weight:500;
+  }
+  
+  .risk-card.high .risk-amount{ color:#991b1b; }
+  .risk-card.medium .risk-amount{ color:#92400e; }
+  .risk-card.low .risk-amount{ color:#166534; }
+  
+  .deal-cards-container{
+    display:flex;
+    gap:16px;
+  }
+  
+  .main-deals{
+    flex:2;
+  }
+  
+  .deal-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:16px;
+    margin-bottom:12px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .deal-header-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:start;
+    margin-bottom:10px;
+  }
+  
+  .deal-info h3{
+    font-size:14px;
+    font-weight:700;
+    margin:0 0 6px 0;
+    color:#111827;
+  }
+  
+  .deal-meta{
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  
+  .deal-badge{
+    padding:3px 9px;
+    border-radius:12px;
+    font-size:10px;
+    font-weight:600;
+  }
+  
+  .deal-badge.green{
+    background:#dcfce7;
+    color:#166534;
+  }
+  
+  .deal-badge.blue{
+    background:#dbeafe;
+    color:#1e40af;
+  }
+  
+  .deal-badge.purple{
+    background:#e9d5ff;
+    color:#7c3aed;
+  }
+  
+  .deal-days{
+    font-size:11px;
+    color:#6b7280;
+  }
+  
+  .deal-rep{
+    font-size:11px;
+    color:#3b82f6;
+    margin-left:4px;
+  }
+  
+  .deal-score-box{
+    text-align:right;
+  }
+  
+  .deal-score{
+    font-size:28px;
+    font-weight:700;
+    line-height:1;
+    display:flex;
+    align-items:center;
+    gap:4px;
+  }
+  
+  .deal-score.high{ color:#ef4444; }
+  .deal-score.medium{ color:#f59e0b; }
+  
+  .score-trend{
+    font-size:11px;
+    font-weight:600;
+    padding:2px 6px;
+    border-radius:4px;
+  }
+  
+  .score-trend.up{
+    background:#fee2e2;
+    color:#dc2626;
+  }
+  
+  .score-trend.down{
+    background:#dcfce7;
+    color:#16a34a;
+  }
+  
+  .root-causes-section{
+    margin:12px 0;
+  }
+  
+  .section-title{
+    font-size:11px;
+    font-weight:700;
+    margin-bottom:8px;
+    color:#111827;
+  }
+  
+  .cause-item{
+    font-size:10px;
+    line-height:1.5;
+    margin-bottom:5px;
+    padding-left:16px;
+    position:relative;
+    color:#374151;
+  }
+  
+  .cause-item.warning:before{
+    content:'⚠';
+    position:absolute;
+    left:0;
+    color:#f59e0b;
+    font-size:12px;
+  }
+  
+  .cause-item.error:before{
+    content:'✗';
+    position:absolute;
+    left:0;
+    color:#ef4444;
+    font-size:10px;
+  }
+  
+  .action-box{
+    background:#dbeafe;
+    padding:10px;
+    border-radius:6px;
+    margin-top:10px;
+  }
+  
+  .action-box .section-title{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin-bottom:6px;
+  }
+  
+  .action-text{
+    font-size:11px;
+    color:#1e40af;
+    line-height:1.4;
+  }
+  
+  .deal-actions{
+    display:flex;
+    gap:10px;
+    margin-top:12px;
+  }
+  
+  .btn{
+    padding:8px 14px;
+    border-radius:6px;
+    font-size:11px;
+    font-weight:600;
+    border:none;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:5px;
+  }
+  
+  .btn-primary{
+    background:#3b82f6;
+    color:#fff;
+  }
+  
+  .btn-secondary{
+    background:#f9fafb;
+    color:#374151;
+    border:1px solid #e5e7eb;
+  }
+  
+  .team-performance{
+    flex:1;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:16px;
+    box-shadow:0 1px 3px rgba(0,0,0,0.1);
+    max-height:450px;
+  }
+  
+  .perf-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:12px;
+  }
+  
+  .perf-header h3{
+    font-size:14px;
+    font-weight:700;
+    color:#111827;
+  }
+  
+  .perf-time{
+    font-size:10px;
+    color:#6b7280;
+  }
+  
+  .perf-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+  }
+  
+  .perf-tab{
+    padding:5px 12px;
+    border-radius:6px;
+    font-size:10px;
+    font-weight:600;
+    cursor:pointer;
+    border:1px solid #e5e7eb;
+    background:#fff;
+    color:#6b7280;
+  }
+  
+  .perf-tab.active{
+    background:#dbeafe;
+    color:#1e40af;
+    border-color:#3b82f6;
+  }
+  
+  .perf-table{
+    width:100%;
+    font-size:10px;
+  }
+  
+  .perf-table thead{
+    border-bottom:2px solid #e5e7eb;
+  }
+  
+  .perf-table th{
+    text-align:left;
+    padding:8px 6px;
+    font-weight:600;
+    color:#6b7280;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:0.5px;
+  }
+  
+  .perf-table td{
+    padding:8px 6px;
+    border-bottom:1px solid #f3f4f6;
+  }
+  
+  .perf-table tr:hover{
+    background:#f9fafb;
+  }
+  
+  .perf-adoption{
+    font-weight:600;
+  }
+  
+  .perf-adoption.high{ color:#22c55e; }
+  .perf-adoption.medium{ color:#f59e0b; }
+  
+  /* Footer */
+  .footer{
+    text-align:center;
+    margin-top:14px;
+    font-size:12px;
+    color:#5A6C7D;
+    font-weight:500;
+  }
+  
+  .footer .highlight{
+    color:#22c55e;
+    font-weight:700;
+  }
+
+  /* === STYLES FROM SLIDE 2 (with FIXES) === */
+.slide{ 
+    width:1280px; 
+    height:720px; 
+    padding:35px 40px;
+    position:relative;
+  }
+  
+  /* Simple slide number */
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  h1{ font-size:30px; font-weight:700; color:#111827; margin:0 0 8px 0; }
+  .subhead{ font-size:16px; font-weight:600; color:#374151; margin:0 0 6px 0; }
+  .intro{ font-size:13px; color:#6b7280; margin:0 0 20px 0; line-height:1.5; }
+  
+  .grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; margin-bottom:16px; }
+  .card{ background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:18px; }
+  .icon{ background:#f0fdf4; border-radius:50%; width:50px; height:50px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+  .icon i{ color:#22c55e; font-size:22px; }
+  h3{ font-size:15px; font-weight:700; color:#111827; margin:0 0 10px 0; line-height:1.3; }
+  ul{ margin:0; padding-left:18px; font-size:13px; line-height:1.5; color:#374151; }
+  ul li{ margin-bottom:5px; }
+  
+  .badges{ margin-bottom:14px; }
+  .badge{ display:inline-block; padding:6px 12px; background:#fff; border-radius:20px; box-shadow:0 2px 5px rgba(0,0,0,0.06); font-size:12px; font-weight:500; margin-right:8px; margin-bottom:8px; }
+  
+  .root-problem{ background:#fef3c7; color:#92400e; border-radius:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); padding:18px 24px; text-align:center; margin-bottom:14px; }
+  .root-problem p{ font-size:14px; margin:0; line-height:1.5; }
+  .root-problem .label{ font-weight:700; font-size:17px; margin-bottom:6px; letter-spacing:0.5px; }
+  
+  .transition{ background:#dcfce7; border-radius:8px; padding:12px; text-align:center; }
+  .transition p{ font-size:14px; font-weight:600; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 3 (with FIXES) === */
+.slide{ 
+    width:1280px; 
+    height:720px; 
+    padding:30px 40px;
+    position:relative;
+  }
+  
+  /* Simple slide number */
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  h1{ font-size:28px; font-weight:700; color:#111827; margin:0 0 24px 0; text-align:center; }
+  
+  .mapping{ display:grid; grid-template-columns:1fr auto 1fr; gap:16px; margin-bottom:16px; align-items:center; }
+  
+  .pain{ background:#fee2e2; border-left:4px solid #ef4444; border-radius:10px; padding:14px 16px; }
+  .pain h3{ font-size:14px; font-weight:700; color:#b91c1c; margin:0 0 6px 0; display:flex; align-items:center; gap:6px; }
+  .pain p{ font-size:12px; line-height:1.5; margin:0; color:#7f1d1d; }
+  
+  .arrow{ font-size:28px; color:#22c55e; }
+  
+  .solution{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:10px; padding:14px 16px; }
+  .solution h3{ font-size:14px; font-weight:700; color:#166534; margin:0 0 6px 0; }
+  .solution p{ font-size:12px; line-height:1.5; margin:0 0 6px 0; color:#14532d; }
+  
+  .impact{ background:#f0fdf4; border-radius:6px; padding:6px 10px; font-size:11px; font-weight:600; color:#166534; margin-top:6px; }
+  
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:12px; padding:16px 24px; text-align:center; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+  .summary h2{ font-size:18px; font-weight:700; color:#166534 /* GREEN heading */; margin:0 0 10px 0; }
+  
+  .stat{ display:inline-block; margin:0 16px; }
+  .stat .value{ font-size:28px; font-weight:700; color:#22c55e; display:block; }
+  .stat .label{ font-size:12px; color:#166534; }
+
+  /* === STYLES FROM SLIDE 4 (with FIXES) === */
+.slide{ 
+    width:1280px; 
+    height:720px; 
+    padding:32px 40px;
+    position:relative;
+  }
+
+  /* Simple slide number */
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  h1{ font-size:28px; font-weight:700; color:#111827; margin:0 0 8px 0; text-align:center; }
+  .subhead{ font-size:15px; color:#6b7280; margin:0 0 20px 0; text-align:center; }
+  .stats{ display:flex; justify-content:center; gap:30px; margin-bottom:24px; }
+  .stat{ text-align:center; }
+  .stat-value{ font-size:32px; font-weight:700; color:#22c55e; display:block; }
+  .stat-label{ font-size:13px; color:#374151; }
+  .grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; margin-bottom:18px; }
+  .card{ background:#fff; border-radius:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); padding:20px; transition:transform 0.2s; }
+  .card:hover{ transform:translateY(-4px); box-shadow:0 6px 16px rgba(0,0,0,0.15); }
+  .icon{ background:#f0fdf4; border-radius:50%; width:56px; height:56px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
+  .icon i{ color:#22c55e; font-size:26px; }
+  h3{ font-size:16px; font-weight:700; color:#111827; margin:0 0 8px 0; }
+  .question{ font-size:13px; color:#6b7280; margin:0 0 10px 0; font-style:italic; }
+  .solves{ background:#dcfce7; color:#166534; padding:5px 10px; border-radius:12px; font-size:11px; font-weight:600; display:inline-block; margin-top:8px; }
+  .cta{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:12px; padding:16px 24px; text-align:center; }
+  .cta p{ font-size:15px; font-weight:600; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 5 (with FIXES) === */
+.slide{ 
+    width:1280px; 
+    height:720px; 
+    padding:25px 30px;
+    position:relative;
+  }
+  
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:10px 16px; margin-bottom:12px; }
+  .banner p{ font-size:12px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:24px; font-weight:700; color:#111827; margin:0 0 14px 0; text-align:center; }
+  
+  .content{ display:flex; gap:16px; height:600px; }
+  
+  /* LEFT: Dashboard Recreation */
+  .dashboard{ flex:1.2; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; overflow:hidden; }
+  
+  .dash-header{ background:#f9fafb; padding:10px 14px; margin:-16px -16px 14px; display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #e5e7eb; }
+  .dash-header h2{ font-size:15px; font-weight:700; color:#111827; margin:0; }
+  .dash-actions{ display:flex; gap:7px; }
+  .btn{ padding:5px 11px; border-radius:6px; font-size:10px; font-weight:600; border:1px solid #e5e7eb; background:#fff; color:#374151; cursor:pointer; }
+  .btn.primary{ background:#dcfce7; color:#166534; border-color:#bbf7d0; }
+  
+  .risk-summary{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:14px; }
+  .risk-card{ padding:12px; border-radius:10px; text-align:center; }
+  .risk-card.high{ background:#fee2e2; border:2px solid #fecaca; }
+  .risk-card.medium{ background:#fef3c7; border:2px solid #fde68a; }
+  .risk-card.low{ background:#dcfce7; border:2px solid #bbf7d0; }
+  .risk-label{ font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:4px; }
+  .risk-card.high .risk-label{ color:#991b1b; }
+  .risk-card.medium .risk-label{ color:#92400e; }
+  .risk-card.low .risk-label{ color:#166534; }
+  .risk-count{ font-size:20px; font-weight:700; margin-bottom:2px; }
+  .risk-card.high .risk-count{ color:#7f1d1d; }
+  .risk-card.medium .risk-count{ color:#78350f; }
+  .risk-card.low .risk-count{ color:#14532d; }
+  .risk-amount{ font-size:9px; font-weight:600; }
+  .risk-card.high .risk-amount{ color:#991b1b; }
+  .risk-card.medium .risk-amount{ color:#92400e; }
+  .risk-card.low .risk-amount{ color:#166534; }
+  
+  .deal-list{ display:flex; gap:14px; }
+  .deal-main{ flex:1; }
+  .team-sidebar{ flex:0 0 210px; }
+  
+  .deal-item{ background:#fff; border:2px solid #e5e7eb; border-radius:10px; padding:12px; margin-bottom:12px; }
+  .deal-item.high{ border-color:#fecaca; background:#fef2f2; }
+  .deal-item.medium{ border-color:#fde68a; background:#fefce8; }
+  
+  .deal-top{ display:flex; justify-content:space-between; margin-bottom:8px; }
+  .deal-name{ font-size:13px; font-weight:700; color:#111827; margin:0 0 3px 0; }
+  .deal-meta{ font-size:9px; color:#6b7280; }
+  .deal-badges{ display:flex; gap:4px; margin-top:4px; }
+  .badge{ padding:2px 7px; border-radius:10px; font-size:8px; font-weight:600; }
+  .badge.green{ background:#dcfce7; color:#166534; }
+  .badge.blue{ background:#dbeafe; color:#1e40af; }
+  .badge.purple{ background:#e9d5ff; color:#7c3aed; }
+  
+  .deal-score{ font-size:28px; font-weight:700; line-height:1; text-align:right; }
+  .deal-score.high{ color:#ef4444; }
+  .deal-score.medium{ color:#f59e0b; }
+  .deal-score.low{ color:#22c55e; }
+  .trend{ font-size:10px; font-weight:600; padding:2px 5px; border-radius:4px; margin-left:3px; }
+  .trend.up{ background:#fee2e2; color:#dc2626; }
+  .trend.down{ background:#dcfce7; color:#16a34a; }
+  
+  .deal-causes{ margin:8px 0; padding:8px; background:#fffbeb; border-left:3px solid #f59e0b; border-radius:4px; }
+  .cause-label{ font-size:9px; font-weight:700; color:#92400e; margin-bottom:4px; }
+  .cause-item{ font-size:8px; line-height:1.4; margin-bottom:3px; padding-left:12px; position:relative; color:#78350f; }
+  .cause-item:before{ content:'⚠'; position:absolute; left:0; font-size:10px; }
+  .cause-item.error:before{ content:'✗'; color:#ef4444; }
+  
+  .deal-action{ background:#dbeafe; padding:8px; border-radius:6px; margin-top:8px; }
+  .action-label{ font-size:8px; font-weight:700; color:#1e3a8a; margin-bottom:3px; }
+  .action-text{ font-size:9px; color:#1e40af; font-weight:600; }
+  
+  .deal-footer{ font-size:8px; color:#6b7280; margin-top:6px; }
+  
+  .team-panel{ background:#fff; border:1px solid #e5e7eb; border-radius:8px; padding:10px; }
+  .team-header{ font-size:11px; font-weight:700; color:#111827; margin-bottom:6px; padding-bottom:6px; border-bottom:1px solid #f3f4f6; }
+  .team-tabs{ display:flex; gap:4px; margin-bottom:8px; }
+  .tab{ padding:3px 8px; border-radius:4px; font-size:8px; font-weight:600; border:1px solid #e5e7eb; background:#fff; color:#6b7280; cursor:pointer; }
+  .tab.active{ background:#dbeafe; color:#1e40af; border-color:#3b82f6; }
+  
+  .team-table{ width:100%; font-size:8px; }
+  .team-table th{ text-align:left; padding:4px 3px; font-weight:600; color:#6b7280; font-size:7px; text-transform:uppercase; letter-spacing:0.3px; border-bottom:1px solid #e5e7eb; }
+  .team-table td{ padding:4px 3px; border-bottom:1px solid #f3f4f6; }
+  .adoption{ font-weight:600; }
+  .adoption.high{ color:#22c55e; }
+  .adoption.medium{ color:#f59e0b; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 320px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #22c55e; border-radius:10px; padding:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:12px; font-weight:700; color:#111827; margin:0 0 6px 0; }
+  .callout p{ font-size:10px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#22c55e; font-weight:700; }
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:10px; padding:12px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:14px; font-weight:700; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 6 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:25px 30px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:20px;
+    right:30px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:10px 16px; margin-bottom:12px; }
+  .banner p{ font-size:12px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:24px; font-weight:700; color:#111827; margin:0 0 14px 0; text-align:center; }
+  
+  .content{ display:flex; gap:16px; height:600px; }
+  
+  /* LEFT: Call Intelligence */
+  .call-panel{ flex:1.3; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; overflow:hidden; display:flex; flex-direction:column; }
+  
+  .call-header{ margin-bottom:12px; padding-bottom:10px; border-bottom:2px solid #f3f4f6; }
+  .call-title{ font-size:16px; font-weight:700; color:#111827; margin:0 0 6px 0; }
+  .call-meta{ font-size:10px; color:#6b7280; display:flex; gap:12px; }
+  
+  .transcript-area{ flex:1; overflow-y:auto; padding-right:8px; }
+  .transcript-area::-webkit-scrollbar{ width:5px; }
+  .transcript-area::-webkit-scrollbar-track{ background:#f3f4f6; border-radius:4px; }
+  .transcript-area::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:4px; }
+  
+  .transcript-line{ margin-bottom:14px; }
+  .timestamp{ font-size:9px; font-weight:600; color:#9ca3af; margin-bottom:4px; }
+  .speaker{ font-size:12px; font-weight:700; color:#3b82f6; margin-bottom:4px; }
+  .message{ font-size:11px; line-height:1.5; color:#374151; margin-bottom:6px; }
+  
+  .tags{ display:flex; gap:5px; flex-wrap:wrap; }
+  .tag{ padding:3px 8px; border-radius:10px; font-size:8px; font-weight:600; }
+  .tag.pain{ background:#fee2e2; color:#991b1b; }
+  .tag.discovery{ background:#dbeafe; color:#1e3a8a; }
+  .tag.budget{ background:#fef3c7; color:#92400e; }
+  .tag.objection{ background:#fff7ed; color:#9a3412; }
+  .tag.buying{ background:#dcfce7; color:#166534; }
+  .tag.next-step{ background:#e9d5ff; color:#6b21a8; }
+  
+  .ai-box{ background:#f0f9ff; border-left:4px solid #3b82f6; border-radius:8px; padding:12px; margin-top:12px; }
+  .ai-title{ font-size:11px; font-weight:700; color:#1e40af; margin:0 0 6px 0; }
+  .ai-item{ font-size:9px; line-height:1.4; margin-bottom:4px; padding-left:12px; position:relative; color:#1e40af; }
+  .ai-item:before{ content:'→'; position:absolute; left:0; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 320px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #22c55e; border-radius:10px; padding:12px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:12px; font-weight:700; color:#111827; margin:0 0 6px 0; }
+  .callout p{ font-size:10px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#22c55e; font-weight:700; }
+  
+  .stat-box{ background:#f0fdf4; border-radius:6px; padding:8px; margin-top:6px; text-align:center; }
+  .stat-value{ font-size:20px; font-weight:700; color:#22c55e; display:block; }
+  .stat-label{ font-size:9px; color:#166534; }
+  
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:10px; padding:12px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:14px; font-weight:700; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 7 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:22px 28px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:18px;
+    right:28px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:9px 14px; margin-bottom:10px; }
+  .banner p{ font-size:11px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:22px; font-weight:700; color:#111827; margin:0 0 12px 0; text-align:center; }
+  
+  .content{ display:flex; gap:14px; height:610px; }
+  
+  /* LEFT: Rep Scorecard */
+  .scorecard{ flex:1.4; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; overflow-y:auto; }
+  .scorecard::-webkit-scrollbar{ width:5px; }
+  .scorecard::-webkit-scrollbar-track{ background:#f3f4f6; border-radius:4px; }
+  .scorecard::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:4px; }
+  
+  .rep-header{ display:flex; gap:14px; margin-bottom:14px; padding-bottom:12px; border-bottom:2px solid #f3f4f6; }
+  .avatar{ width:60px; height:60px; border-radius:50%; background:#3b82f6; display:flex; align-items:center; justify-content:center; color:#fff; font-size:20px; font-weight:700; flex-shrink:0; }
+  .rep-info{ flex:1; }
+  .rep-name{ font-size:16px; font-weight:700; color:#111827; margin:0 0 2px 0; }
+  .rep-title{ font-size:11px; color:#6b7280; margin:0 0 6px 0; }
+  .rep-contact{ font-size:9px; color:#9ca3af; display:flex; gap:12px; }
+  .score-badge{ background:#f59e0b; color:#fff; padding:8px 14px; border-radius:50%; font-size:18px; font-weight:700; text-align:center; line-height:1.2; }
+  .score-badge .small{ font-size:10px; display:block; }
+  .rank-badge{ background:#fef3c7; color:#92400e; padding:4px 10px; border-radius:12px; font-size:10px; font-weight:700; margin-top:6px; }
+  
+  .metrics{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; margin-bottom:14px; }
+  .metric-card{ background:#f9fafb; border-radius:8px; padding:10px; }
+  .metric-label{ font-size:9px; font-weight:600; color:#6b7280; text-transform:uppercase; margin-bottom:4px; }
+  .metric-value{ font-size:20px; font-weight:700; color:#111827; margin-bottom:2px; }
+  .metric-change{ font-size:9px; font-weight:600; }
+  .metric-change.up{ color:#22c55e; }
+  .metric-change.down{ color:#ef4444; }
+  
+  .section{ margin-bottom:14px; }
+  .section-title{ font-size:12px; font-weight:700; color:#111827; margin:0 0 8px 0; }
+  .strength-item{ font-size:10px; line-height:1.5; padding-left:18px; position:relative; color:#374151; margin-bottom:4px; }
+  .strength-item:before{ content:'✓'; position:absolute; left:0; color:#22c55e; font-weight:700; }
+  
+  .improvement-box{ background:#fef2f2; border-left:3px solid #ef4444; border-radius:6px; padding:10px; margin-bottom:8px; }
+  .improvement-title{ font-size:10px; font-weight:700; color:#991b1b; margin:0 0 4px 0; }
+  .improvement-text{ font-size:9px; line-height:1.4; color:#7f1d1d; margin-bottom:3px; }
+  
+  .ai-coaching{ background:#f0f9ff; border-left:3px solid #3b82f6; border-radius:6px; padding:10px; }
+  .ai-title{ font-size:11px; font-weight:700; color:#1e40af; margin:0 0 6px 0; }
+  .ai-item{ font-size:9px; line-height:1.4; margin-bottom:4px; padding-left:12px; position:relative; color:#1e40af; }
+  .ai-item:before{ content:'→'; position:absolute; left:0; }
+  
+  .coaching-plan{ background:#f5f3ff; border-left:3px solid #8b5cf6; border-radius:6px; padding:10px; margin-top:10px; }
+  .plan-title{ font-size:10px; font-weight:700; color:#6b21a8; margin:0 0 4px 0; }
+  .plan-text{ font-size:9px; color:#6b21a8; margin-bottom:6px; }
+  .plan-btn{ background:#8b5cf6; color:#fff; padding:5px 10px; border-radius:6px; font-size:9px; font-weight:600; border:none; cursor:pointer; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 300px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #22c55e; border-radius:10px; padding:11px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:11px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .callout p{ font-size:9px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#22c55e; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:10px; padding:11px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:13px; font-weight:700; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 8 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:22px 28px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:18px;
+    right:28px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:9px 14px; margin-bottom:10px; }
+  .banner p{ font-size:11px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:22px; font-weight:700; color:#111827; margin:0 0 12px 0; text-align:center; }
+  
+  .content{ display:flex; gap:14px; height:610px; }
+  
+  /* LEFT: AI Modal */
+  .ai-modal-container{ flex:1.3; display:flex; align-items:center; justify-content:center; }
+  .ai-modal{ background:#3b82f6; border-radius:16px; box-shadow:0 20px 60px rgba(0,0,0,0.3); padding:24px; width:100%; max-width:550px; font-family:'Inter',sans-serif; }
+  
+  .modal-header{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+  .modal-title{ display:flex; align-items:center; gap:10px; color:#fff; }
+  .modal-icon{ background:rgba(255,255,255,0.2); width:40px; height:40px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:20px; }
+  .modal-text{ font-size:18px; font-weight:700; }
+  .modal-subtitle{ font-size:12px; color:rgba(255,255,255,0.8); margin-top:2px; }
+  .modal-close{ color:#fff; font-size:20px; cursor:pointer; background:none; border:none; }
+  
+  .help-text{ font-size:13px; color:rgba(255,255,255,0.9); margin-bottom:14px; font-weight:500; }
+  
+  .preset-questions{ display:flex; flex-direction:column; gap:10px; margin-bottom:18px; }
+  .preset-btn{ background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:#fff; padding:12px 16px; border-radius:10px; font-size:12px; font-weight:500; text-align:left; cursor:pointer; transition:all 0.2s; }
+  .preset-btn:hover{ background:rgba(255,255,255,0.25); transform:translateY(-2px); }
+  
+  .or-divider{ text-align:center; color:rgba(255,255,255,0.7); font-size:11px; margin:14px 0; position:relative; }
+  .or-divider:before,
+  .or-divider:after{ content:''; position:absolute; top:50%; width:45%; height:1px; background:rgba(255,255,255,0.3); }
+  .or-divider:before{ left:0; }
+  .or-divider:after{ right:0; }
+  
+  .ask-anything{ font-size:12px; color:rgba(255,255,255,0.9); margin-bottom:8px; font-weight:500; }
+  
+  .input-container{ background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); border-radius:10px; padding:12px; display:flex; align-items:center; gap:10px; }
+  .input-field{ flex:1; background:none; border:none; color:#fff; font-size:12px; outline:none; }
+  .input-field::placeholder{ color:rgba(255,255,255,0.5); }
+  .ask-btn{ background:#fff; color:#3b82f6; padding:8px 20px; border-radius:8px; font-size:12px; font-weight:700; border:none; cursor:pointer; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 300px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #3b82f6; border-radius:10px; padding:11px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:11px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .callout p{ font-size:9px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#3b82f6; font-weight:700; }
+  
+  .summary{ background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); /* GREEN gradient */ border-left: 4px solid #22c55e; /* GREEN border */ border-radius:10px; padding:11px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:13px; font-weight:700; color:#166534 /* GREEN text */; margin:0; }
+
+  /* === STYLES FROM SLIDE 9 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:20px 26px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:16px;
+    right:26px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    z-index:10;
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:8px 13px; margin-bottom:9px; }
+  .banner p{ font-size:10px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:20px; font-weight:700; color:#111827; margin:0 0 10px 0; text-align:center; }
+  
+  .content{ display:flex; gap:13px; height:625px; }
+  
+  /* LEFT: Playbook Panel with Chart */
+  .playbook-panel{ flex:1.5; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:15px; font-family:'Inter',sans-serif; overflow-y:auto; }
+  .playbook-panel::-webkit-scrollbar{ width:5px; }
+  .playbook-panel::-webkit-scrollbar-track{ background:#f3f4f6; border-radius:4px; }
+  .playbook-panel::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:4px; }
+  
+  .panel-header{ margin-bottom:12px; }
+  .panel-title{ font-size:16px; font-weight:700; color:#111827; margin:0 0 3px 0; }
+  .panel-subtitle{ font-size:11px; color:#6b7280; margin:0 0 12px 0; }
+  
+  .controls{ display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:12px; }
+  .control-group{ display:flex; flex-direction:column; gap:4px; }
+  .control-label{ font-size:9px; font-weight:600; color:#6b7280; text-transform:uppercase; letter-spacing:0.3px; }
+  .control-select{ padding:6px 10px; border:1px solid #e5e7eb; border-radius:6px; font-size:11px; background:#fff; color:#374151; font-family:'Inter',sans-serif; }
+  
+  .action-buttons{ display:flex; gap:8px; margin-bottom:14px; }
+  .action-btn{ padding:6px 11px; border:1px solid #e5e7eb; border-radius:6px; font-size:10px; font-weight:600; background:#fff; color:#374151; cursor:pointer; display:flex; align-items:center; gap:5px; }
+  
+  .chart-section{ margin-bottom:16px; }
+  .chart-title{ font-size:13px; font-weight:700; color:#111827; margin:0 0 10px 0; }
+  .chart-container{ background:#f9fafb; border-radius:8px; padding:12px; height:160px; position:relative; }
+  .chart-area{ width:100%; height:100%; background:linear-gradient(to bottom, rgba(59,130,246,0.3) 0%, rgba(59,130,246,0.1) 50%, rgba(59,130,246,0.05) 100%); border-radius:4px; position:relative; }
+  .chart-curve{ position:absolute; bottom:0; left:0; right:0; height:80%; background:linear-gradient(to bottom, rgba(96,165,250,0.7) 0%, rgba(147,197,253,0.4) 100%); clip-path: polygon(0 40%, 8.33% 38%, 16.67% 42%, 25% 35%, 33.33% 28%, 41.67% 32%, 50% 30%, 58.33% 28%, 66.67% 30%, 75% 32%, 83.33% 28%, 91.67% 30%, 100% 25%, 100% 100%, 0 100%); }
+  .chart-labels{ display:flex; justify-content:space-between; margin-top:6px; }
+  .chart-label{ font-size:8px; color:#9ca3af; }
+  
+  .section{ margin-bottom:14px; }
+  .section-title{ font-size:12px; font-weight:700; color:#111827; margin:0 0 9px 0; }
+  
+  .action-table{ width:100%; border-collapse:collapse; font-size:9px; }
+  .action-table th{ text-align:left; padding:7px 8px; font-size:8px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.4px; border-bottom:2px solid #e5e7eb; background:#f9fafb; }
+  .action-table td{ padding:8px; border-bottom:1px solid #f3f4f6; }
+  .action-name{ color:#111827; font-weight:500; }
+  
+  .completion-bar{ background:#e5e7eb; height:7px; border-radius:4px; position:relative; width:85px; }
+  .completion-fill{ height:100%; border-radius:4px; position:absolute; top:0; left:0; }
+  .completion-fill.high{ background:#22c55e; }
+  .completion-fill.medium{ background:#f59e0b; }
+  .completion-fill.low{ background:#ef4444; }
+  .completion-text{ font-size:9px; font-weight:700; margin-right:7px; }
+  .completion-text.high{ color:#22c55e; }
+  .completion-text.medium{ color:#f59e0b; }
+  .completion-text.low{ color:#ef4444; }
+  
+  .impact{ font-size:9px; font-weight:700; color:#22c55e; }
+  
+  .priorities{ display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; }
+  .priority-card{ border-radius:9px; padding:10px; border-left:4px solid; }
+  .priority-card.red{ background:#fef2f2; border-color:#ef4444; }
+  .priority-card.orange{ background:#fff7ed; border-color:#f59e0b; }
+  .priority-card.purple{ background:#faf5ff; border-color:#8b5cf6; }
+  .priority-title{ font-size:10px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .priority-meta{ font-size:8px; color:#6b7280; margin-bottom:5px; }
+  .priority-reps{ font-size:7px; color:#6b7280; margin-bottom:7px; }
+  .priority-btn{ background:#8b5cf6; color:#fff; padding:5px 9px; border-radius:5px; font-size:8px; font-weight:600; border:none; cursor:pointer; width:100%; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 280px; display:flex; flex-direction:column; gap:9px; }
+  .callout{ background:#fff; border-left:4px solid #22c55e; border-radius:9px; padding:10px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:10px; font-weight:700; color:#111827; margin:0 0 4px 0; }
+  .callout p{ font-size:8px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#22c55e; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:9px; padding:10px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:12px; font-weight:700; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 10 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:16px 22px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:12px;
+    right:22px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    z-index:10;
+  }
+  
+  .banner{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:8px; padding:7px 11px; margin-bottom:7px; }
+  .banner p{ font-size:9px; font-weight:600; color:#166534; margin:0; }
+  
+  h1{ font-size:18px; font-weight:700; color:#111827; margin:0 0 8px 0; text-align:center; }
+  
+  .content{ display:flex; gap:11px; height:650px; }
+  
+  /* LEFT: Analytics Panel */
+  .analytics-panel{ flex:1.7; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:12px; font-family:'Inter',sans-serif; overflow-y:auto; }
+  .analytics-panel::-webkit-scrollbar{ width:5px; }
+  .analytics-panel::-webkit-scrollbar-track{ background:#f3f4f6; border-radius:4px; }
+  .analytics-panel::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:4px; }
+  
+  .panel-title{ font-size:14px; font-weight:700; color:#111827; margin:0 0 3px 0; }
+  .panel-subtitle{ font-size:9px; color:#6b7280; margin:0 0 10px 0; }
+  
+  .metrics-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:12px; }
+  .metric-card{ background:#f9fafb; border:1px solid #e5e7eb; border-radius:7px; padding:8px; }
+  .metric-label{ font-size:7px; font-weight:700; color:#6b7280; text-transform:uppercase; letter-spacing:0.3px; margin-bottom:4px; }
+  .metric-value{ font-size:18px; font-weight:700; color:#111827; margin-bottom:2px; }
+  .metric-change{ font-size:7px; font-weight:600; }
+  .metric-change.up{ color:#22c55e; }
+  .metric-change.down{ color:#ef4444; }
+  
+  /* Pipeline Velocity Chart */
+  .velocity-section{ margin-bottom:12px; }
+  .velocity-title{ font-size:11px; font-weight:700; color:#111827; margin-bottom:8px; }
+  .chart-container{ background:#f9fafb; border-radius:8px; padding:10px; height:140px; position:relative; }
+  .chart-svg{ width:100%; height:100%; }
+  
+  .split-section{ display:flex; gap:10px; }
+  .funnel-section{ flex:1; }
+  .winloss-section{ flex:1; }
+  
+  .section-title{ font-size:11px; font-weight:700; color:#111827; margin:0 0 8px 0; }
+  
+  .funnel-stage{ background:#fff; border:2px solid; border-radius:7px; padding:8px; margin-bottom:6px; }
+  .funnel-stage.discovery{ border-color:#dbeafe; background:#eff6ff; }
+  .funnel-stage.demo{ border-color:#d1fae5; background:#f0fdf4; }
+  .funnel-stage.negotiation{ border-color:#fef3c7; background:#fffbeb; }
+  .funnel-stage.closed{ border-color:#ddd6fe; background:#faf5ff; }
+  
+  .stage-header{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:4px; }
+  .stage-label{ font-size:7px; font-weight:700; text-transform:uppercase; letter-spacing:0.3px; }
+  .stage-label.discovery{ color:#1e40af; }
+  .stage-label.demo{ color:#166534; }
+  .stage-label.negotiation{ color:#92400e; }
+  .stage-label.closed{ color:#6b21a8; }
+  
+  .stage-deals{ font-size:14px; font-weight:700; color:#111827; }
+  .stage-value{ font-size:8px; color:#6b7280; margin-bottom:3px; }
+  .stage-conversion{ font-size:8px; font-weight:600; color:#6b7280; }
+  .conversion-value{ font-weight:700; color:#22c55e; }
+  
+  .pie-container{ display:flex; justify-content:center; align-items:center; margin-bottom:10px; position:relative; height:110px; }
+  .pie-chart{ width:110px; height:110px; border-radius:50%; background: conic-gradient(#22c55e 0% 36%, #ef4444 36% 100%); position:relative; }
+  .pie-legend{ display:flex; justify-content:center; gap:14px; font-size:9px; }
+  .legend-item{ display:flex; align-items:center; gap:4px; }
+  .legend-dot{ width:9px; height:9px; border-radius:50%; }
+  .legend-dot.won{ background:#22c55e; }
+  .legend-dot.lost{ background:#ef4444; }
+  
+  .loss-reasons{ margin-top:8px; }
+  .reason-label{ font-size:8px; font-weight:600; color:#111827; margin-bottom:4px; }
+  .reason-item{ display:flex; align-items:center; gap:6px; margin-bottom:5px; }
+  .reason-name{ font-size:8px; color:#374151; width:60px; }
+  .reason-bar{ flex:1; background:#e5e7eb; height:6px; border-radius:3px; position:relative; }
+  .reason-fill{ height:100%; border-radius:3px; position:absolute; top:0; left:0; }
+  .reason-fill.purple{ background:#8b5cf6; }
+  .reason-fill.blue{ background:#3b82f6; }
+  .reason-fill.orange{ background:#f59e0b; }
+  .reason-fill.gray{ background:#6b7280; }
+  .reason-fill.pink{ background:#ec4899; }
+  .reason-percent{ font-size:8px; font-weight:700; color:#111827; width:30px; text-align:right; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 250px; display:flex; flex-direction:column; gap:8px; }
+  .callout{ background:#fff; border-left:4px solid #22c55e; border-radius:8px; padding:9px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:9px; font-weight:700; color:#111827; margin:0 0 3px 0; }
+  .callout p{ font-size:7.5px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#22c55e; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border-left:4px solid #22c55e; border-radius:8px; padding:9px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:10px; font-weight:700; color:#166534; margin:0; }
+
+  /* === STYLES FROM SLIDE 11 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:22px 28px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:18px;
+    right:28px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#e0e7ff; border-left:4px solid #6366f1; border-radius:8px; padding:9px 14px; margin-bottom:10px; }
+  .banner p{ font-size:11px; font-weight:600; color:#3730a3; margin:0; }
+  
+  h1{ font-size:22px; font-weight:700; color:#111827; margin:0 0 12px 0; text-align:center; }
+  
+  .content{ display:flex; gap:14px; height:610px; }
+  
+  /* LEFT: Architecture Diagram */
+  .architecture-panel{ flex:1.5; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; }
+  
+  .flow-diagram{ margin-bottom:16px; }
+  .flow-row{ display:flex; gap:12px; align-items:center; margin-bottom:12px; }
+  .flow-box{ flex:1; background:#f9fafb; border:2px solid; border-radius:10px; padding:14px; text-align:center; }
+  .flow-box.sources{ border-color:#10b981; background:#f0fdf4; }
+  .flow-box.processing{ border-color:#6366f1; background:#eef2ff; }
+  .flow-box.outputs{ border-color:#f59e0b; background:#fffbeb; }
+  
+  .box-title{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:8px; }
+  .box-title.sources{ color:#047857; }
+  .box-title.processing{ color:#4338ca; }
+  .box-title.outputs{ color:#d97706; }
+  
+  .box-items{ font-size:10px; line-height:1.8; color:#374151; }
+  .box-item{ display:block; }
+  
+  .arrow{ flex:0 0 40px; text-align:center; font-size:24px; color:#6366f1; font-weight:700; }
+  
+  .sync-note{ background:#fef3c7; border-left:3px solid #f59e0b; border-radius:6px; padding:10px; margin-bottom:16px; }
+  .sync-note-title{ font-size:10px; font-weight:700; color:#92400e; margin-bottom:4px; }
+  .sync-note-text{ font-size:9px; color:#78350f; }
+  
+  .detail-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .detail-card{ background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:10px; }
+  .detail-title{ font-size:10px; font-weight:700; color:#111827; margin-bottom:6px; }
+  .detail-list{ font-size:8px; line-height:1.6; color:#374151; }
+  .detail-item{ padding-left:12px; position:relative; margin-bottom:3px; }
+  .detail-item:before{ content:'•'; position:absolute; left:0; color:#6366f1; font-weight:700; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 300px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #6366f1; border-radius:10px; padding:11px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:11px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .callout p{ font-size:9px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#6366f1; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-left:4px solid #6366f1; border-radius:10px; padding:11px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:13px; font-weight:700; color:#4338ca; margin:0; }
+
+  /* === STYLES FROM SLIDE 12 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:22px 28px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:18px;
+    right:28px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#e0e7ff; border-left:4px solid #6366f1; border-radius:8px; padding:9px 14px; margin-bottom:10px; }
+  .banner p{ font-size:11px; font-weight:600; color:#3730a3; margin:0; }
+  
+  h1{ font-size:22px; font-weight:700; color:#111827; margin:0 0 12px 0; text-align:center; }
+  
+  .content{ display:flex; gap:14px; height:610px; }
+  
+  /* LEFT: Timeline */
+  .timeline-panel{ flex:1.5; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; }
+  
+  .timeline{ margin-bottom:16px; }
+  .phase{ margin-bottom:14px; position:relative; padding-left:30px; }
+  .phase:before{ content:''; position:absolute; left:10px; top:28px; bottom:-14px; width:3px; background:#e5e7eb; }
+  .phase:last-child:before{ display:none; }
+  
+  .phase-dot{ position:absolute; left:0; top:10px; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:700; }
+  .phase-dot.setup{ background:#fef3c7; color:#92400e; border:3px solid #fde68a; }
+  .phase-dot.monitor{ background:#dbeafe; color:#1e40af; border:3px solid #93c5fd; }
+  .phase-dot.validate{ background:#dcfce7; color:#166534; border:3px solid #bbf7d0; }
+  .phase-dot.rollout{ background:#e9d5ff; color:#6b21a8; border:3px solid #d8b4fe; }
+  
+  .phase-header{ display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+  .phase-title{ font-size:12px; font-weight:700; color:#111827; }
+  .phase-duration{ font-size:9px; color:#6b7280; background:#f3f4f6; padding:2px 7px; border-radius:10px; }
+  
+  .phase-desc{ font-size:9px; line-height:1.6; color:#374151; margin-bottom:6px; }
+  
+  .gate{ background:#dcfce7; border-left:3px solid #22c55e; border-radius:6px; padding:6px 8px; display:inline-flex; align-items:center; gap:5px; }
+  .gate-icon{ color:#22c55e; font-size:12px; }
+  .gate-text{ font-size:8px; font-weight:700; color:#166534; }
+  
+  .control-cards{ display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:12px; }
+  .control-card{ background:#f9fafb; border:1px solid #e5e7eb; border-radius:8px; padding:10px; }
+  .control-title{ font-size:10px; font-weight:700; color:#111827; margin-bottom:6px; }
+  .control-list{ font-size:8px; line-height:1.6; color:#374151; }
+  .control-item{ padding-left:12px; position:relative; margin-bottom:3px; }
+  .control-item:before{ content:'•'; position:absolute; left:0; color:#6366f1; font-weight:700; }
+  
+  .kpi-badges{ display:flex; gap:8px; justify-content:center; }
+  .kpi-badge{ background:#fff; border:2px solid #6366f1; border-radius:20px; padding:6px 12px; font-size:9px; font-weight:700; color:#4338ca; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 300px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #6366f1; border-radius:10px; padding:11px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:11px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .callout p{ font-size:9px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#6366f1; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-left:4px solid #6366f1; border-radius:10px; padding:11px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:13px; font-weight:700; color:#4338ca; margin:0; }
+
+  /* === STYLES FROM SLIDE 13 (with FIXES) === */
+.slide{ width:1280px; height:720px; padding:22px 28px; position:relative; }
+  
+  .slide-number{
+    position:absolute;
+    top:18px;
+    right:28px;
+    background:rgba(255,255,255,0.9);
+    color:#374151;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+  }
+  
+  .banner{ background:#e0e7ff; border-left:4px solid #6366f1; border-radius:8px; padding:9px 14px; margin-bottom:10px; }
+  .banner p{ font-size:11px; font-weight:600; color:#3730a3; margin:0; }
+  
+  h1{ font-size:22px; font-weight:700; color:#111827; margin:0 0 12px 0; text-align:center; }
+  
+  .content{ display:flex; gap:14px; height:610px; }
+  
+  /* LEFT: Metrics Panel */
+  .metrics-panel{ flex:1.5; background:#fff; border-radius:12px; box-shadow:0 4px 12px rgba(0,0,0,0.12); padding:16px; font-family:'Inter',sans-serif; overflow-y:auto; }
+  .metrics-panel::-webkit-scrollbar{ width:5px; }
+  .metrics-panel::-webkit-scrollbar-track{ background:#f3f4f6; border-radius:4px; }
+  .metrics-panel::-webkit-scrollbar-thumb{ background:#cbd5e1; border-radius:4px; }
+  
+  .metrics-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+  .metric-card{ background:#f9fafb; border:2px solid #e5e7eb; border-radius:10px; padding:12px; position:relative; }
+  
+  .pending-badge{ position:absolute; top:10px; right:10px; background:#fef3c7; color:#92400e; padding:3px 8px; border-radius:10px; font-size:8px; font-weight:700; }
+  
+  .metric-title{ font-size:11px; font-weight:700; color:#111827; margin-bottom:6px; }
+  .metric-formula{ background:#fff; border:1px solid #e5e7eb; border-radius:6px; padding:8px; margin-bottom:8px; }
+  .formula-label{ font-size:8px; font-weight:700; color:#6b7280; text-transform:uppercase; margin-bottom:4px; }
+  .formula-text{ font-size:9px; color:#374151; font-family:monospace; }
+  
+  .metric-how{ font-size:9px; color:#6b7280; line-height:1.5; }
+  .metric-how strong{ color:#111827; }
+  
+  .acceptance-box{ background:#dcfce7; border-left:4px solid #22c55e; border-radius:10px; padding:14px; }
+  .acceptance-title{ font-size:12px; font-weight:700; color:#166534; margin-bottom:10px; }
+  .acceptance-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
+  .acceptance-item{ background:#fff; border-radius:6px; padding:8px; }
+  .acceptance-metric{ font-size:9px; font-weight:700; color:#111827; margin-bottom:2px; }
+  .acceptance-target{ font-size:12px; font-weight:700; color:#22c55e; }
+  
+  .note{ background:#fffbeb; border-left:3px solid #f59e0b; border-radius:6px; padding:10px; margin-top:12px; }
+  .note-text{ font-size:9px; color:#78350f; }
+  .note-text strong{ color:#92400e; }
+  
+  /* RIGHT: Feature Callouts */
+  .callouts{ flex:0 0 300px; display:flex; flex-direction:column; gap:10px; }
+  .callout{ background:#fff; border-left:4px solid #6366f1; border-radius:10px; padding:11px; box-shadow:0 3px 8px rgba(0,0,0,0.1); }
+  .callout h4{ font-size:11px; font-weight:700; color:#111827; margin:0 0 5px 0; }
+  .callout p{ font-size:9px; line-height:1.5; margin:0; color:#374151; }
+  .highlight{ color:#6366f1; font-weight:700; }
+  
+  .summary{ background:linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%); border-left:4px solid #6366f1; border-radius:10px; padding:11px; text-align:center; margin-top: 10px; /* FIXED: Changed from auto to 10px */ }
+  .summary p{ font-size:13px; font-weight:700; color:#4338ca; margin:0; }
+
+</style>
+</head>
+<body>
+<div class="presentation-container">
+
+
+<!-- SLIDE 1 -->
+<div class="slide">
+  <div class="header">
+    <h1>Pipeline Review Dashboard</h1>
+    <h2>AI-Powered Sales Coaching That Transforms Manager Productivity</h2>
+  </div>
+  
+  <div class="browser-container">
+    <div class="browser-window">
+      <!-- Browser Chrome -->
+      <div class="browser-chrome">
+        <div class="browser-dots">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div class="browser-url">
+          <span class="lock-icon">🔒</span>
+          <span>zime-ai-case-study.vercel.app</span>
+        </div>
+        <div class="live-badge">
+          <span class="live-dot"></span>
+          LIVE
+        </div>
+      </div>
+      
+      <!-- Dashboard Content -->
+      <div class="dashboard">
+        <!-- Dashboard Header -->
+        <div class="dash-header">
+          <div class="dash-logo">
+            <img src="https://zime.ai/_next/image?url=https%3A%2F%2Fs3.us-west-2.amazonaws.com%2Fzime.ai-website-asset%2Flogo%2Fzime-coral-black.png&w=256&q=75" alt="Zime"/>
+          </div>
+          <div class="dash-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search deals, reps, or calls..."/>
+          </div>
+          <div class="dash-actions">
+            <div class="status">
+              <span class="status-dot"></span>
+              All systems ready
+            </div>
+            <div class="export-btn">
+              📄 Export
+            </div>
+            <div class="avatar">AT</div>
+          </div>
+        </div>
+        
+        <!-- Navigation -->
+        <div class="dash-nav">
+          <div class="nav-item active">📊 Dashboard</div>
+          <div class="nav-item">📖 Team Playbook</div>
+          <div class="nav-item">📈 Analytics</div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="dash-content">
+          <!-- Risk Summary Cards -->
+          <div class="risk-cards">
+            <div class="risk-card high">
+              <div class="risk-icon">⚠</div>
+              <div class="risk-label">HIGH RISK</div>
+              <div class="risk-count">3 deals</div>
+              <div class="risk-amount">$171K needs immediate attention</div>
+            </div>
+            <div class="risk-card medium">
+              <div class="risk-icon">⚠</div>
+              <div class="risk-label">MEDIUM RISK</div>
+              <div class="risk-count">5 deals</div>
+              <div class="risk-amount">$225K requires monitoring</div>
+            </div>
+            <div class="risk-card low">
+              <div class="risk-icon">✓</div>
+              <div class="risk-label">LOW RISK</div>
+              <div class="risk-count">4 deals</div>
+              <div class="risk-amount">$220K tracking well</div>
+            </div>
+          </div>
+          
+          <!-- Deal Cards & Team Performance -->
+          <div class="deal-cards-container">
+            <div class="main-deals">
+              <!-- Acme Corp -->
+              <div class="deal-card">
+                <div class="deal-header-row">
+                  <div class="deal-info">
+                    <h3>Acme Corp - Enterprise Plan</h3>
+                    <div class="deal-meta">
+                      <span class="deal-badge green">$50K</span>
+                      <span class="deal-badge blue">Discovery</span>
+                      <span class="deal-badge purple">20%</span>
+                      <span class="deal-days">18 days in stage</span>
+                      <span class="deal-rep">Rep: Sarah Johnson →</span>
+                    </div>
+                  </div>
+                  <div class="deal-score-box">
+                    <div class="deal-score high">
+                      <span>85</span>
+                      <span class="score-trend up">+5</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="root-causes-section">
+                  <div class="section-title">Root Causes:</div>
+                  <div class="cause-item warning">Score increased due to lack of recent activity.</div>
+                  <div class="cause-item error">No economic buyer identified (40% lower win rate when skipped)</div>
+                  <div class="cause-item error">Rep skipped budget qualification</div>
+                </div>
+                
+                <div class="action-box">
+                  <div class="section-title">
+                    <span>🎯</span>
+                    Recommended Action:
+                  </div>
+                  <div class="action-text">Schedule multi-threading call with CFO by Friday</div>
+                </div>
+                
+                <div class="deal-actions">
+                  <button class="btn btn-primary">📞 View Call</button>
+                  <button class="btn btn-secondary">💬 Coach</button>
+                  <button class="btn btn-secondary">✓ Safe</button>
+                </div>
+              </div>
+              
+              <!-- TechStart Inc -->
+              <div class="deal-card">
+                <div class="deal-header-row">
+                  <div class="deal-info">
+                    <h3>TechStart Inc - Growth Package</h3>
+                    <div class="deal-meta">
+                      <span class="deal-badge green">$35K</span>
+                      <span class="deal-badge blue">Demo</span>
+                      <span class="deal-badge purple">60%</span>
+                      <span class="deal-days">12 days in stage</span>
+                      <span class="deal-rep">Rep: John Smith →</span>
+                    </div>
+                  </div>
+                  <div class="deal-score-box">
+                    <div class="deal-score medium">
+                      <span>72</span>
+                      <span class="score-trend down">-3</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="root-causes-section">
+                  <div class="section-title">Root Causes:</div>
+                  <div class="cause-item warning">Score improved after addressing integration concerns.</div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Team Performance -->
+            <div class="team-performance">
+              <div class="perf-header">
+                <div>
+                  <h3>Team Performance</h3>
+                  <div class="perf-time">Last 30 days</div>
+                </div>
+              </div>
+              
+              <div class="perf-tabs">
+                <div class="perf-tab active">All</div>
+                <div class="perf-tab">Top Performers</div>
+                <div class="perf-tab">Needs Coach</div>
+              </div>
+              
+              <table class="perf-table">
+                <thead>
+                  <tr>
+                    <th>RANK</th>
+                    <th>REP</th>
+                    <th>ADOPTION</th>
+                    <th>WIN RATE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>JS</td>
+                    <td class="perf-adoption high">88%</td>
+                    <td>42%</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>SJ</td>
+                    <td class="perf-adoption high">92%</td>
+                    <td>35%</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>MD</td>
+                    <td class="perf-adoption high">85%</td>
+                    <td>38%</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>EP</td>
+                    <td class="perf-adoption high">91%</td>
+                    <td>40%</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>JC</td>
+                    <td class="perf-adoption medium">79%</td>
+                    <td>33%</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>RK</td>
+                    <td class="perf-adoption medium">82%</td>
+                    <td>36%</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>DM</td>
+                    <td style="color:#9333ea;">✨ Ask ZIME AI</td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="footer">
+    <p>
+      <strong>Ayush Tiwari</strong> • October 20, 2025 • Submitted to Zime AI • 
+      <span class="highlight">Live: zime-ai-case-study.vercel.app</span>
+    </p>
+  </div>
+</div>
+
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <div class="slide-number">02</div>
+  
+  <h1>Austin's Scalability Crisis</h1>
+  <p class="subhead">10 reps, $5M/Q target, forecasts under scrutiny</p>
+  <p class="intro">Reviews are time-heavy, early-stage quality debt accumulates, and there's no verifiable lens on playbook execution at scale.</p>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fas fa-clock"></i></div>
+      <h3>15 hours/week of manual reviews</h3>
+      <ul>
+        <li>1:1s get deferred; context decays between meetings</li>
+        <li>Cognitive overload scanning CRM, notes, and calls</li>
+        <li>Prioritization by gut, not evidence-linked reasons</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fas fa-phone-alt"></i></div>
+      <h3>Can't observe 100–200 calls/week</h3>
+      <ul>
+        <li>Follow-up quality and timeliness are opaque</li>
+        <li>Critical moments buried in transcripts and email</li>
+        <li>No signal on which behaviors actually moved deals</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fas fa-book"></i></div>
+      <h3>No objective playbook measurement</h3>
+      <ul>
+        <li>Tools record/automate, but don't verify method steps</li>
+        <li>Budget, multi-threading, stakeholder mapping untracked</li>
+        <li>Early-stage quality debt compounds into late surprises</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <h3>Opinion-driven risk in reviews</h3>
+      <ul>
+        <li>"Deal looks good" despite missing economic buyer</li>
+        <li>Budget not qualified; single-threaded engagements</li>
+        <li>No overrideable, transparent score to align decisions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="badges">
+    <span class="badge">Time Dilution</span>
+    <span class="badge">Missed Coaching</span>
+    <span class="badge">Late Risks</span>
+    <span class="badge">Forecast Anxiety</span>
+  </div>
+
+  <div class="root-problem">
+    <p class="label">ROOT PROBLEM</p>
+    <p>No scalable way to verify who followed the methodology with traceable reasoning</p>
+  </div>
+
+  <div class="transition">
+    <p><i class="fas fa-arrow-down" style="margin-right:6px;"></i>Next: How our dashboard solves each of these pain points</p>
+  </div>
+</div>
+
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <div class="slide-number">03</div>
+  
+  <h1>How Our Dashboard Solves Austin's Pain Points</h1>
+
+  <div class="mapping">
+    <div class="pain">
+      <h3><i class="fas fa-clock"></i>15 hours/week manual reviews</h3>
+      <p>Cognitive overload, prioritization by gut, context decay</p>
+    </div>
+    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="solution">
+      <h3>Risk Dashboard</h3>
+      <p>AI triage surfaces top 3 deals with explainable scoring and next actions in 5 minutes</p>
+      <div class="impact"><i class="fas fa-check-circle" style="margin-right:3px;"></i>Impact: 12 hours/week saved (80% reduction)</div>
+    </div>
+  </div>
+
+  <div class="mapping">
+    <div class="pain">
+      <h3><i class="fas fa-phone-alt"></i>Can't observe 100-200 calls</h3>
+      <p>Critical moments buried, no behavior signal</p>
+    </div>
+    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="solution">
+      <h3>Call Intelligence</h3>
+      <p>Auto-tagged transcripts (Pain, Objection, Budget, Buying Signal) with playbook checklist</p>
+      <div class="impact"><i class="fas fa-check-circle" style="margin-right:3px;"></i>Impact: Spot-check 20 key calls in 30 min vs 8 hours</div>
+    </div>
+  </div>
+
+  <div class="mapping">
+    <div class="pain">
+      <h3><i class="fas fa-book"></i>No objective playbook measurement</h3>
+      <p>Early-stage debt compounds; budget, multi-threading untracked</p>
+    </div>
+    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="solution">
+      <h3>Rep Scorecards + Team Playbook</h3>
+      <p>Transparent adoption % by action, per rep and stage. Priority gap formula identifies targets</p>
+      <div class="impact"><i class="fas fa-check-circle" style="margin-right:3px;"></i>Impact: Evidence-based 1:1s with specific call examples</div>
+    </div>
+  </div>
+
+  <div class="mapping">
+    <div class="pain">
+      <h3><i class="fas fa-exclamation-triangle"></i>Opinion-driven risk</h3>
+      <p>"Deal looks good" despite missing economic buyer</p>
+    </div>
+    <div class="arrow"><i class="fas fa-arrow-right"></i></div>
+    <div class="solution">
+      <h3>Analytics: Pattern Discovery</h3>
+      <p>Correlate behaviors to outcomes: "Budget in discovery → 34% faster close"</p>
+      <div class="impact"><i class="fas fa-check-circle" style="margin-right:3px;"></i>Impact: Data-driven coaching priorities, not opinions</div>
+    </div>
+  </div>
+
+  <div class="summary">
+    <h2>Transformation Summary</h2>
+    <div>
+      <div class="stat">
+        <span class="value">15 hrs</span>
+        <span class="label">→ 3 hrs/week</span>
+      </div>
+      <div class="stat">
+        <span class="value">80%</span>
+        <span class="label">time saved</span>
+      </div>
+      <div class="stat">
+        <span class="value">5 screens</span>
+        <span class="label">manager control</span>
+      </div>
+      <div class="stat">
+        <span class="value">100%</span>
+        <span class="label">explainable</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <div class="slide-number">04</div>
+
+  <h1>Product Overview: 5 Core Screens</h1>
+  <p class="subhead">Each screen answers a specific manager question and solves a pain point</p>
+
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-value">390+</span>
+      <span class="stat-label">chart configurations</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">22</span>
+      <span class="stat-label">playbook actions tracked</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">100+</span>
+      <span class="stat-label">manager-tunable features</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon"><i class="fas fa-exclamation-triangle"></i></div>
+      <h3>Risk Dashboard</h3>
+      <p class="question">"Which deals need my attention right now?"</p>
+      <span class="solves">Solves: 15 hrs/week → 5 min triage</span>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Analytics</h3>
+      <p class="question">"What behaviors actually drive outcomes?"</p>
+      <span class="solves">Solves: Opinion → Data-driven decisions</span>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-user-check"></i></div>
+      <h3>Rep Scorecards</h3>
+      <p class="question">"Who needs coaching on what?"</p>
+      <span class="solves">Solves: No playbook visibility → 100% transparent</span>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-book-open"></i></div>
+      <h3>Team Playbook</h3>
+      <p class="question">"Where should I focus coaching this quarter?"</p>
+      <span class="solves">Solves: Gut-feel priorities → Evidence-based targets</span>
+    </div>
+
+    <div class="card">
+      <div class="icon"><i class="fas fa-phone-volume"></i></div>
+      <h3>Call Intelligence</h3>
+      <p class="question">"What actually happened on that call?"</p>
+      <span class="solves">Solves: Can't observe 200 calls → Spot-check 20 key moments</span>
+    </div>
+  </div>
+
+  <div class="cta">
+    <p><i class="fas fa-arrow-right" style="margin-right:8px;"></i>Let's dive deeper into the most critical screen: Risk Dashboard</p>
+  </div>
+</div>
+
+
+<!-- SLIDE 5 -->
+<div class="slide">
+  <div class="slide-number">05</div>
+  
+  <div class="banner">
+    <p><strong>✓ Solves Austin's Pain:</strong> 15 hours/week of manual pipeline reviews → 5 minutes of AI-powered triage</p>
+  </div>
+  
+  <h1>Risk Dashboard: Intelligent Deal Prioritization</h1>
+  
+  <div class="content">
+    <!-- LEFT: Dashboard -->
+    <div class="dashboard">
+      <div class="dash-header">
+        <h2>Risk Dashboard</h2>
+        <div class="dash-actions">
+          <button class="btn">Filter</button>
+          <button class="btn primary">Export</button>
+        </div>
+      </div>
+      
+      <!-- Risk Summary Cards -->
+      <div class="risk-summary">
+        <div class="risk-card high">
+          <div class="risk-label">HIGH RISK</div>
+          <div class="risk-count">3 deals</div>
+          <div class="risk-amount">$171K needs immediate attention</div>
+        </div>
+        <div class="risk-card medium">
+          <div class="risk-label">MEDIUM RISK</div>
+          <div class="risk-count">5 deals</div>
+          <div class="risk-amount">$225K requires monitoring</div>
+        </div>
+        <div class="risk-card low">
+          <div class="risk-label">LOW RISK</div>
+          <div class="risk-count">4 deals</div>
+          <div class="risk-amount">$220K tracking well</div>
+        </div>
+      </div>
+      
+      <div class="deal-list">
+        <!-- Deal Cards -->
+        <div class="deal-main">
+          <!-- Acme Corp -->
+          <div class="deal-item high">
+            <div class="deal-top">
+              <div>
+                <div class="deal-name">Acme Corp - Enterprise Plan</div>
+                <div class="deal-meta">Enterprise SaaS • $50K • Discovery</div>
+                <div class="deal-badges">
+                  <span class="badge green">$50K</span>
+                  <span class="badge blue">Discovery</span>
+                  <span class="badge purple">20%</span>
+                </div>
+              </div>
+              <div>
+                <div class="deal-score high">85<span class="trend up">+5↑</span></div>
+              </div>
+            </div>
+            
+            <div class="deal-causes">
+              <div class="cause-label">Root Causes:</div>
+              <div class="cause-item">Score increased due to lack of recent activity.</div>
+              <div class="cause-item error">No economic buyer identified (40% lower win rate when skipped)</div>
+              <div class="cause-item error">Rep skipped budget qualification</div>
+            </div>
+            
+            <div class="deal-action">
+              <div class="action-label">Recommended Action:</div>
+              <div class="action-text">Schedule multi-threading call with CFO by Friday</div>
+            </div>
+            
+            <div class="deal-footer">⏱ 18 days in stage • Rep: Sarah Johnson</div>
+          </div>
+          
+          <!-- TechStart Inc -->
+          <div class="deal-item medium" style="opacity:0.7;">
+            <div class="deal-top">
+              <div>
+                <div class="deal-name">TechStart Inc - Growth Package</div>
+                <div class="deal-meta">Growth Package • $35K • Demo</div>
+              </div>
+              <div>
+                <div class="deal-score medium">72<span class="trend down">-3↓</span></div>
+              </div>
+            </div>
+            <div class="deal-footer">⏱ 12 days in stage • Rep: John Smith</div>
+          </div>
+        </div>
+        
+        <!-- Team Performance Sidebar -->
+        <div class="team-sidebar">
+          <div class="team-panel">
+            <div class="team-header">Team Performance</div>
+            <div class="team-tabs">
+              <div class="tab active">All</div>
+              <div class="tab">Top</div>
+              <div class="tab">Coach</div>
+            </div>
+            <table class="team-table">
+              <thead>
+                <tr>
+                  <th>RANK</th>
+                  <th>REP</th>
+                  <th>ADOPT</th>
+                  <th>WIN%</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>JS</td>
+                  <td class="adoption high">88%</td>
+                  <td>42%</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>SJ</td>
+                  <td class="adoption high">92%</td>
+                  <td>35%</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>MD</td>
+                  <td class="adoption high">85%</td>
+                  <td>38%</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>JC</td>
+                  <td class="adoption medium">79%</td>
+                  <td>33%</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>RK</td>
+                  <td class="adoption medium">82%</td>
+                  <td>36%</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>DM</td>
+                  <td style="color:#9333ea; font-size:7px;">✨ Ask AI</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Cards -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>📊 Transparent Risk Score</h4>
+        <p><span class="highlight">Rule-based scoring</span> grounded in playbook adherence and deal signals. Trend shows movement over time.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Root Cause Identified</h4>
+        <p><span class="highlight">No economic buyer</span> flagged with evidence. Impact data: <strong>40% lower win rate</strong> when skipped.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 Clear Next Action</h4>
+        <p style="color:#22c55e; font-weight:700; margin-bottom:4px;">"Schedule CFO call by Friday"</p>
+        <p style="font-size:9px;">Expected impact: <span class="highlight">+35% win probability</span></p>
+      </div>
+      
+      <div class="callout">
+        <h4>⏱ From Hours to Minutes</h4>
+        <p>Quick scan of risks backed by <span class="highlight">transcript snippets</span> and CRM evidence.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Austin knows <span style="color:#22c55e;">WHY</span>, not just WHAT</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 6 -->
+<div class="slide">
+  <div class="slide-number">06</div>
+  
+  <div class="banner">
+    <p><strong>✓ Solves Austin's Pain:</strong> Can't observe 100-200 calls/week → Spot-check 20 key moments in 30 minutes</p>
+  </div>
+  
+  <h1>Call Intelligence: Auto-Tagged Moments & AI Insights</h1>
+  
+  <div class="content">
+    <!-- LEFT: Call Transcript -->
+    <div class="call-panel">
+      <div class="call-header">
+        <div class="call-title">Acme Corp - Enterprise Plan</div>
+        <div class="call-meta">
+          <span>📅 Oct 16, 2025</span>
+          <span>⏱ 42 mins</span>
+          <span>👥 Sarah Johnson, John Smith (Buyer)</span>
+          <span style="color:#f59e0b;">⭐ 7/10</span>
+        </div>
+      </div>
+      
+      <div class="transcript-area">
+        <!-- Transcript Lines -->
+        <div class="transcript-line">
+          <div class="timestamp">00:02</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">Hi John, thanks for taking the time today. I really appreciate you making space in your schedule.</div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">00:15</div>
+          <div class="speaker">John:</div>
+          <div class="message">No problem at all. I'm looking forward to learning more about your solution.</div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">00:18</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">We're currently using Stripe for payments, but we're having some integration challenges with our legacy systems.</div>
+          <div class="tags">
+            <span class="tag pain">Pain Point</span>
+          </div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">15:30</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">That makes sense. I've worked with several companies transitioning from Stripe. Can you tell me more about the specific integration issues you're facing?</div>
+          <div class="tags">
+            <span class="tag discovery">Discovery Question</span>
+          </div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">28:30</div>
+          <div class="speaker">John:</div>
+          <div class="message">Pricing is a concern for us. We need to make sure this fits within our Q1 budget.</div>
+          <div class="tags">
+            <span class="tag objection">Objection</span>
+            <span class="tag budget">Budget Signal</span>
+          </div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">28:45</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">I understand. Let me show you how our pricing compares and the ROI you can expect in the first quarter.</div>
+          <div class="tags">
+            <span class="tag discovery">Objection Response</span>
+          </div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">35:20</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">This looks promising. I'd like to involve our CFO in the next conversation.</div>
+          <div class="tags">
+            <span class="tag buying">Buying Signal</span>
+          </div>
+        </div>
+        
+        <div class="transcript-line">
+          <div class="timestamp">42:15</div>
+          <div class="speaker">Sarah:</div>
+          <div class="message">That sounds great. I'll send over a calendar invite for next week. Looking forward to continuing the conversation.</div>
+          <div class="tags">
+            <span class="tag next-step">Next Step</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="ai-box">
+        <div class="ai-title">🤖 AI Insights</div>
+        <div class="ai-item">Budget signal detected at 28:30 but not qualified</div>
+        <div class="ai-item">Good discovery pacing - 15 questions in first 20 mins</div>
+        <div class="ai-item">CFO mentioned but not invited to next meeting</div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Cards -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>🏷 Auto-Tagged Moments</h4>
+        <p><span class="highlight">Pain Points, Budget Signals, Objections, Buying Signals</span> auto-detected. Jump to critical moments instantly.</p>
+        <div class="stat-box">
+          <span class="stat-value">95%</span>
+          <span class="stat-label">tagging accuracy</span>
+        </div>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Playbook Verification</h4>
+        <p>AI checks if rep <span class="highlight">qualified budget, identified champion, multi-threaded</span>. Evidence-based coaching.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 Smart Recommendations</h4>
+        <p style="color:#3b82f6; font-weight:700; margin-bottom:4px;">"CFO mentioned but not invited"</p>
+        <p style="font-size:9px;">Next action: <span class="highlight">Schedule CFO call by Friday</span></p>
+      </div>
+      
+      <div class="callout">
+        <h4>⚡ Contextual AI Assistant</h4>
+        <p><span class="highlight">Screen-aware prompts:</span> "What went wrong in this call?" "Draft feedback for Sarah" "Find similar closed deals"</p>
+      </div>
+      
+      <div class="summary">
+        <p>8 hrs/day → 30 mins spot-checking</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 7 -->
+<div class="slide">
+  <div class="slide-number">07</div>
+  
+  <div class="banner">
+    <p><strong>✓ Solves Austin's Pain:</strong> No playbook visibility → 100% transparent adoption % with evidence-based coaching targets</p>
+  </div>
+  
+  <h1>Rep Scorecards: Who Needs Coaching on What?</h1>
+  
+  <div class="content">
+    <!-- LEFT: Scorecard -->
+    <div class="scorecard">
+      <div class="rep-header">
+        <div class="avatar">SJ</div>
+        <div class="rep-info">
+          <div class="rep-name">Sarah Johnson</div>
+          <div class="rep-title">Senior Account Executive</div>
+          <div class="rep-contact">
+            <span>📧 sarah.johnson@zime.com</span>
+            <span>📞 +1 (555) 234-5678</span>
+          </div>
+        </div>
+        <div>
+          <div class="score-badge">
+            8.5<span class="small">/10</span>
+          </div>
+          <div class="rank-badge">#2 on team</div>
+        </div>
+      </div>
+      
+      <div class="metrics">
+        <div class="metric-card">
+          <div class="metric-label">Playbook Adoption</div>
+          <div class="metric-value">92%</div>
+          <div class="metric-change up">↑ +5.2% vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Win Rate</div>
+          <div class="metric-value">35%</div>
+          <div class="metric-change down">↓ -3.5% vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Avg Deal Size</div>
+          <div class="metric-value">$52K</div>
+          <div class="metric-change up">↑ +1.5K vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Active Deals</div>
+          <div class="metric-value">8</div>
+          <div class="metric-change down">↓ -1 vs last period</div>
+        </div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title">✅ Strengths</div>
+        <div class="strength-item">Excellent discovery skills</div>
+        <div class="strength-item">Strong relationship building</div>
+        <div class="strength-item">Technical product knowledge</div>
+      </div>
+      
+      <div class="section">
+        <div class="section-title">⚠ Areas for Improvement</div>
+        <div class="improvement-box">
+          <div class="improvement-title">Budget qualification</div>
+          <div class="improvement-text">• Skipped in 60% of discovery calls</div>
+          <div class="improvement-text">• Impact: Deals without budget discussion close 18% less often</div>
+        </div>
+        <div class="improvement-box">
+          <div class="improvement-title">Multi-threading</div>
+          <div class="improvement-text">• Engages 1.2 stakeholders vs 2.4 team avg</div>
+        </div>
+      </div>
+      
+      <div class="ai-coaching">
+        <div class="ai-title">🤖 AI Coaching Recommendations</div>
+        <div class="ai-item">Share call recording from John Smith (top performer) showing budget qualification</div>
+        <div class="ai-item">Add budget discussion to next 3 pre-call checklists</div>
+        <div class="ai-item">Schedule role-play session for multi-threading scenarios</div>
+      </div>
+      
+      <div class="coaching-plan">
+        <div class="plan-title">✨ AI-Generated Coaching Plan</div>
+        <div class="plan-text">Based on 42 analyzed calls from last 30 days</div>
+        <div class="plan-text" style="color:#8b5cf6; font-weight:700; font-size:10px;">🎯 Priority: Improve budget qualification</div>
+        <div class="plan-text">Expected impact: +12% win rate increase</div>
+        <button class="plan-btn">Create Coaching Task</button>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Cards -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>📊 Transparent Playbook Tracking</h4>
+        <p><span class="highlight">92% adoption</span> shows Sarah follows playbook, but <span class="highlight">budget qualification gap</span> identified with evidence.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Root Cause Analysis</h4>
+        <p><span class="highlight">Skipped in 60% of calls</span> + <span class="highlight">18% lower close rate</span> = Clear coaching priority with impact data.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 AI Coaching Recommendations</h4>
+        <p>Specific actions: <span class="highlight">Share top performer's call, add to checklist, role-play</span>. No more guesswork.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>⚡ Expected Impact</h4>
+        <p style="color:#8b5cf6; font-weight:700; margin-bottom:3px;">"+12% win rate increase"</p>
+        <p style="font-size:8px;">Based on correlation analysis across team performance data.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Evidence-based 1:1s in 15 mins</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 8 -->
+<div class="slide">
+  <div class="slide-number">7A</div>
+  
+  <div class="banner">
+    <p><strong>✓ Breakthrough Feature:</strong> Context-aware AI assistant that adapts questions based on which screen you're viewing</p>
+  </div>
+  
+  <h1>Ask ZIME AI: Contextual Intelligence Everywhere</h1>
+  
+  <div class="content">
+    <!-- LEFT: AI Modal Recreation -->
+    <div class="ai-modal-container">
+      <div class="ai-modal">
+        <div class="modal-header">
+          <div class="modal-title">
+            <div class="modal-icon">🤖</div>
+            <div>
+              <div class="modal-text">AI Assistant</div>
+              <div class="modal-subtitle">Ask me about your pipeline</div>
+            </div>
+          </div>
+          <button class="modal-close">✕</button>
+        </div>
+        
+        <div class="help-text">I can help with:</div>
+        
+        <div class="preset-questions">
+          <button class="preset-btn">Why is Acme Corp high-risk?</button>
+          <button class="preset-btn">Which deals need attention today?</button>
+          <button class="preset-btn">Show me calls where budget wasn't discussed</button>
+          <button class="preset-btn">Why is Sarah's win rate lower?</button>
+        </div>
+        
+        <div class="or-divider">Or ask me anything:</div>
+        
+        <div class="ask-anything">Type your question:</div>
+        
+        <div class="input-container">
+          <input type="text" class="input-field" placeholder="E.g., Why are deals stalling in demo stage?"/>
+          <button class="ask-btn">✉ Ask</button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>🎯 Context-Aware Prompts</h4>
+        <p>On <span class="highlight">Risk Dashboard</span> → "Why is Acme Corp high-risk?"<br>On <span class="highlight">Rep Scorecard</span> → "Why is Sarah's win rate lower?"<br>AI knows where you are.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Deep System Knowledge</h4>
+        <p><span class="highlight">Searches across transcripts, CRM data, playbook actions, and analytics</span> to answer complex questions.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>⚡ Instant Answers</h4>
+        <p><span class="highlight">"Show me calls where budget wasn't discussed"</span> → Returns filtered call list + impact data in seconds.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>📊 Actionable Insights</h4>
+        <p>Not just answers — AI suggests <span class="highlight">specific next actions</span> (e.g., "Schedule CFO call", "Create team training").</p>
+      </div>
+      
+      <div class="summary">
+        <p>Every manager becomes a data analyst</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 9 -->
+<div class="slide">
+  <div class="slide-number">08</div>
+  
+  <div class="banner">
+    <p><strong>✓ Solves Austin's Pain:</strong> Gut-feel coaching priorities → Evidence-based targets with impact data</p>
+  </div>
+  
+  <h1>Team Playbook: Track Which Actions Drive Wins</h1>
+  
+  <div class="content">
+    <!-- LEFT: Complete Playbook Panel -->
+    <div class="playbook-panel">
+      <!-- Header -->
+      <div class="panel-header">
+        <div class="panel-title">Team Playbook Adoption Tracker</div>
+        <div class="panel-subtitle">Track which sales actions drive wins</div>
+      </div>
+      
+      <!-- Controls -->
+      <div class="controls">
+        <div class="control-group">
+          <div class="control-label">Metric to Display</div>
+          <select class="control-select">
+            <option>Demo Stage Adoption</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Chart Type</div>
+          <select class="control-select">
+            <option>📉 Area Chart</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <div class="control-label">Time Period</div>
+          <select class="control-select">
+            <option>Last Quarter</option>
+          </select>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="action-buttons">
+        <button class="action-btn">⬇ Export Data</button>
+        <button class="action-btn">📄 Export Report</button>
+        <button class="action-btn">💾 Save Chart</button>
+      </div>
+      
+      <!-- Chart -->
+      <div class="chart-section">
+        <div class="chart-title">Demo Stage Adoption - Last Quarter</div>
+        <div class="chart-container">
+          <div class="chart-area">
+            <div class="chart-curve"></div>
+          </div>
+          <div class="chart-labels">
+            <span class="chart-label">Week 1</span>
+            <span class="chart-label">Week 2</span>
+            <span class="chart-label">Week 3</span>
+            <span class="chart-label">Week 4</span>
+            <span class="chart-label">Week 5</span>
+            <span class="chart-label">Week 6</span>
+            <span class="chart-label">Week 7</span>
+            <span class="chart-label">Week 8</span>
+            <span class="chart-label">Week 9</span>
+            <span class="chart-label">Week 10</span>
+            <span class="chart-label">Week 11</span>
+            <span class="chart-label">Week 12</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Playbook Actions Table -->
+      <div class="section">
+        <div class="section-title">Playbook Actions by Stage (Discovery)</div>
+        <table class="action-table">
+          <thead>
+            <tr>
+              <th>ACTION</th>
+              <th>TEAM COMPLETION</th>
+              <th>IMPACT</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="action-name">Ask about current pain point</td>
+              <td>
+                <span class="completion-text high">88%</span>
+                <div class="completion-bar">
+                  <div class="completion-fill high" style="width:88%;"></div>
+                </div>
+              </td>
+              <td class="impact">+12%</td>
+            </tr>
+            <tr>
+              <td class="action-name">Identify decision-makers</td>
+              <td>
+                <span class="completion-text medium">72%</span>
+                <div class="completion-bar">
+                  <div class="completion-fill medium" style="width:72%;"></div>
+                </div>
+              </td>
+              <td class="impact">+8%</td>
+            </tr>
+            <tr>
+              <td class="action-name">Ask about budget</td>
+              <td>
+                <span class="completion-text low">54%</span>
+                <div class="completion-bar">
+                  <div class="completion-fill low" style="width:54%;"></div>
+                </div>
+              </td>
+              <td class="impact">+18%</td>
+            </tr>
+            <tr>
+              <td class="action-name">Multi-thread (2+ stakeholders)</td>
+              <td>
+                <span class="completion-text low">48%</span>
+                <div class="completion-bar">
+                  <div class="completion-fill low" style="width:48%;"></div>
+                </div>
+              </td>
+              <td class="impact">+14%</td>
+            </tr>
+            <tr>
+              <td class="action-name">Set clear next steps</td>
+              <td>
+                <span class="completion-text high">91%</span>
+                <div class="completion-bar">
+                  <div class="completion-fill high" style="width:91%;"></div>
+                </div>
+              </td>
+              <td class="impact">+5%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Top 3 Priorities -->
+      <div class="section">
+        <div class="section-title">Top 3 Coaching Priorities</div>
+        <div class="priorities">
+          <div class="priority-card red">
+            <div class="priority-title">🎯 Budget Qualification</div>
+            <div class="priority-meta">54% completion | +18% impact</div>
+            <div class="priority-reps">Sarah, Jessica, David</div>
+            <button class="priority-btn">Create Training</button>
+          </div>
+          
+          <div class="priority-card orange">
+            <div class="priority-title">🎯 Multi-Threading</div>
+            <div class="priority-meta">48% completion | +14% impact</div>
+            <div class="priority-reps">Tom, David</div>
+            <button class="priority-btn">Create Training</button>
+          </div>
+          
+          <div class="priority-card purple">
+            <div class="priority-title">🎯 Technical Engagement</div>
+            <div class="priority-meta">62% completion | +12% impact</div>
+            <div class="priority-reps">John, Rachel</div>
+            <button class="priority-btn">Create Training</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>📈 Trend Tracking</h4>
+        <p><span class="highlight">12-week adoption chart</span> shows if coaching efforts are working over time.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>📊 Impact Correlation</h4>
+        <p><span class="highlight">+18% win rate</span> for budget qualification but only <span class="highlight">54% completion</span>.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 Priority Formula</h4>
+        <p><span class="highlight">Low completion + High impact = Top priority.</span> No guesswork.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>👥 Specific Targets</h4>
+        <p><span class="highlight">"Sarah, Jessica, David"</span> need budget coaching. Clear names, not guesses.</p>
+      </div>
+      
+      <div class="summary">
+        <p>From opinions to evidence</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 10 -->
+<div class="slide">
+  <div class="slide-number">09</div>
+  
+  <div class="banner">
+    <p><strong>✓ Solves Austin's Pain:</strong> Opinion-driven decisions → Data-driven insights on what behaviors drive outcomes</p>
+  </div>
+  
+  <h1>Analytics: From Behaviors to Outcomes</h1>
+  
+  <div class="content">
+    <!-- LEFT: Analytics -->
+    <div class="analytics-panel">
+      <div class="panel-title">Sales Analytics</div>
+      <div class="panel-subtitle">Performance insights and trends</div>
+      
+      <!-- Top Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-label">TOTAL PIPELINE</div>
+          <div class="metric-value">$691K</div>
+          <div class="metric-change up">↑ +12.5% vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">AVERAGE DEAL SIZE</div>
+          <div class="metric-value">$48K</div>
+          <div class="metric-change up">↑ +3.2% vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">WIN RATE</div>
+          <div class="metric-value">36%</div>
+          <div class="metric-change down">↓ -2.1% vs last period</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">SALES CYCLE</div>
+          <div class="metric-value">42 days</div>
+          <div class="metric-change down">↑ +5 days vs last period</div>
+        </div>
+      </div>
+      
+      <!-- Pipeline Velocity Chart -->
+      <div class="velocity-section">
+        <div class="velocity-title">Pipeline Velocity - Last 30 Days</div>
+        <div class="chart-container">
+          <svg class="chart-svg" viewBox="0 0 600 120">
+            <!-- Grid lines -->
+            <line x1="0" y1="30" x2="600" y2="30" stroke="#e5e7eb" stroke-width="1"/>
+            <line x1="0" y1="60" x2="600" y2="60" stroke="#e5e7eb" stroke-width="1"/>
+            <line x1="0" y1="90" x2="600" y2="90" stroke="#e5e7eb" stroke-width="1"/>
+            
+            <!-- Blue line (Discovery) -->
+            <polyline points="0,70 120,55 240,45 360,30 480,50 600,60" fill="none" stroke="#3b82f6" stroke-width="2.5"/>
+            ircle cx="0" cy="70" r="4" fill="#3b82f6f6"/>
+            ircle cx="120" cy="55"5" r="4" fill="#3b82f6"/>
+            ircle cx="240" cy="45"5" r="4" fill="#3b82f6"/>
+            ircle cx="360" cy="30" r="4" fill="#3b3b82f6"/>
+            ircle cx="480" cy="50"0" r="4" fill="#3b82f6"/>
+            ircle cx="600" cy="60" r="4" fill="#3b3b82f6"/>
+            
+            <!-- Green line (Demo) -->
+            <polyline points="0,20 120,35 240,55 360,65 480,60 600,75" fill="none" stroke="#22c55e" stroke-width="2.5"/>
+            ircle cx="0" cy="20"0" r="4" fill="#22c55e"/>
+            ircle cx="120" cy="35" r="4" fill="#22c5555e"/>
+            ircle cx="240" cy="55" r="="4" fill="#22c55e"/>
+            ircle cx="36060" cy="65" r="4" fill="#22c55e"/>
+            ircle cx="480" cy="60" r="4"4" fill="#22c55e"/>
+            ircle cx="600" cycy="75" r="4" fill="#22c55e"/>
+            
+            <!-- Orange line (Negotiation) -->
+            <polyline points="0,90 120,75 240,80 360,95 480,100 600,105" fill="none" stroke="#f59e0b" stroke-width="2.5"/>
+            ircle cx="0" cy="90" r="4"4" fill="#f59e0b"/>
+            ircle cx="120" cy="75" r="4" fill="#f59e0b0b"/>
+            ircle cx="240" cy="80" r="4"4" fill="#f59e0b"/>
+            ircle cx="360" cy="95" r="4" fill="#f59e0b0b"/>
+            ircle cx="480" cy="100" r="4"4" fill="#f59e0b"/>
+            ircle cx="600" cy="105" r="4" fill="#f59e0b0b"/>
+            
+            <!-- Legend -->
+            <text x="220" y="118" font-size="8" fill="#3b82f6" font-weight="600">● discovery</text>
+            <text x="290" y="118" font-size="8" fill="#22c55e" font-weight="600">● demo</text>
+            <text x="340" y="118" font-size="8" fill="#f59e0b" font-weight="600">● negotiation</text>
+          </svg>
+        </div>
+      </div>
+      
+      <!-- Funnel + Win/Loss -->
+      <div class="split-section">
+        <!-- Deal Stage Funnel -->
+        <div class="funnel-section">
+          <div class="section-title">Deal Stage Funnel</div>
+          
+          <div class="funnel-stage discovery">
+            <div class="stage-header">
+              <div>
+                <div class="stage-label discovery">DISCOVERY</div>
+                <div class="stage-deals">45 deals</div>
+                <div class="stage-value">$820K</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="stage-conversion">Conversion<br><span class="conversion-value">62%</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="funnel-stage demo">
+            <div class="stage-header">
+              <div>
+                <div class="stage-label demo">DEMO</div>
+                <div class="stage-deals">28 deals</div>
+                <div class="stage-value">$640K</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="stage-conversion">Conversion<br><span class="conversion-value">54%</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="funnel-stage negotiation">
+            <div class="stage-header">
+              <div>
+                <div class="stage-label negotiation">NEGOTIATION</div>
+                <div class="stage-deals">15 deals</div>
+                <div class="stage-value">$580K</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="stage-conversion">Conversion<br><span class="conversion-value">80%</span></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="funnel-stage closed">
+            <div class="stage-header">
+              <div>
+                <div class="stage-label closed">CLOSED WON</div>
+                <div class="stage-deals">12 deals</div>
+                <div class="stage-value">$420K</div>
+              </div>
+              <div style="text-align:right;">
+                <div class="stage-conversion">Win Rate<br><span class="conversion-value">36%</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Win/Loss Analysis -->
+        <div class="winloss-section">
+          <div class="section-title">Win/Loss Analysis</div>
+          
+          <div class="pie-container">
+            <div class="pie-chart"></div>
+          </div>
+          
+          <div class="pie-legend">
+            <div class="legend-item">
+              <div class="legend-dot won"></div>
+              <span>Won: 36%</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot lost"></div>
+              <span>Lost: 64%</span>
+            </div>
+          </div>
+          
+          <div class="loss-reasons">
+            <div class="reason-label">Top Loss Reasons:</div>
+            
+            <div class="reason-item">
+              <div class="reason-name">Price</div>
+              <div class="reason-bar">
+                <div class="reason-fill purple" style="width:28%;"></div>
+              </div>
+              <div class="reason-percent">28%</div>
+            </div>
+            
+            <div class="reason-item">
+              <div class="reason-name">No budget</div>
+              <div class="reason-bar">
+                <div class="reason-fill blue" style="width:22%;"></div>
+              </div>
+              <div class="reason-percent">22%</div>
+            </div>
+            
+            <div class="reason-item">
+              <div class="reason-name">Competitor</div>
+              <div class="reason-bar">
+                <div class="reason-fill orange" style="width:18%;"></div>
+              </div>
+              <div class="reason-percent">18%</div>
+            </div>
+            
+            <div class="reason-item">
+              <div class="reason-name">Timing</div>
+              <div class="reason-bar">
+                <div class="reason-fill gray" style="width:15%;"></div>
+              </div>
+              <div class="reason-percent">15%</div>
+            </div>
+            
+            <div class="reason-item">
+              <div class="reason-name">Other</div>
+              <div class="reason-bar">
+                <div class="reason-fill pink" style="width:17%;"></div>
+              </div>
+              <div class="reason-percent">17%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>📈 Velocity Trends</h4>
+        <p><span class="highlight">Discovery deals trending down</span> while negotiation rising = healthy pipeline movement.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>📊 Conversion Diagnosis</h4>
+        <p><span class="highlight">Discovery → Demo: 62%</span> but <span class="highlight">Demo → Negotiation: only 54%</span>. Demo stage needs improvement.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Loss Pattern Analysis</h4>
+        <p><span class="highlight">28% lost to "Price"</span> correlates with <span class="highlight">54% budget qualification skipped</span> from Playbook.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 Actionable Insight</h4>
+        <p><span class="highlight">"No budget" = 22% loss</span> → Ties to Sarah's 60% budget skip rate. Clear coaching target.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Every metric ties to a behavior</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 11 -->
+<div class="slide">
+  <div class="slide-number">10</div>
+  
+  <div class="banner">
+    <p><strong>⚙️ Task 2:</strong> Technical Architecture & Trust Design - Transparent, rule-based processing with full audit trail</p>
+  </div>
+  
+  <h1>Technical Architecture & Trust Design</h1>
+  
+  <div class="content">
+    <!-- LEFT: Architecture -->
+    <div class="architecture-panel">
+      <!-- Flow Diagram -->
+      <div class="flow-diagram">
+        <div class="flow-row">
+          <div class="flow-box sources">
+            <div class="box-title sources">📥 Sources</div>
+            <div class="box-items">
+              <span class="box-item">Salesforce CRM</span>
+              <span class="box-item">Gong.io Call Recordings</span>
+              <span class="box-item">Google Calendar</span>
+              <span class="box-item">Email Activity</span>
+            </div>
+          </div>
+          
+          <div class="arrow">→</div>
+          
+          <div class="flow-box processing">
+            <div class="box-title processing">⚙️ Processing</div>
+            <div class="box-items">
+              <span class="box-item">Rule-based Scoring Engine</span>
+              <span class="box-item">NLP Tagging (Call Moments)</span>
+              <span class="box-item">Playbook Action Matching</span>
+              <span class="box-item">Analytics Aggregation</span>
+            </div>
+          </div>
+          
+          <div class="arrow">→</div>
+          
+          <div class="flow-box outputs">
+            <div class="box-title outputs">📊 Outputs</div>
+            <div class="box-items">
+              <span class="box-item">Risk Dashboard</span>
+              <span class="box-item">Rep Scorecards</span>
+              <span class="box-item">Call Intelligence</span>
+              <span class="box-item">Team Playbook Tracker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Sync Strategy -->
+      <div class="sync-note">
+        <div class="sync-note-title">🔄 Sync Strategy</div>
+        <div class="sync-note-text">
+          <strong>Real-time webhooks</strong> for critical events (deal stage change, high-risk score) + <strong>Hourly batch sync</strong> for call transcripts and playbook action updates. Data latency: <5 minutes for urgent alerts, 1 hour for analytics refresh.
+        </div>
+      </div>
+      
+      <!-- Detail Cards -->
+      <div class="detail-cards">
+        <div class="detail-card">
+          <div class="detail-title">🎛 Config Surfaces</div>
+          <div class="detail-list">
+            <div class="detail-item">Custom playbook actions</div>
+            <div class="detail-item">Risk score thresholds</div>
+            <div class="detail-item">Tagging taxonomy</div>
+            <div class="detail-item">Alert notification rules</div>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-title">🔒 Data Risk Controls</div>
+          <div class="detail-list">
+            <div class="detail-item">OAuth 2.0 + RBAC permissions</div>
+            <div class="detail-item">SOC 2 Type II compliance</div>
+            <div class="detail-item">Encrypted at-rest & in-transit</div>
+            <div class="detail-item">Full audit log (90-day retention)</div>
+          </div>
+        </div>
+        
+        <div class="detail-card">
+          <div class="detail-title">✅ Trust Design Mechanisms</div>
+          <div class="detail-list">
+            <div class="detail-item">Manager override capability</div>
+            <div class="detail-item">Transparent scoring breakdown</div>
+            <div class="detail-item">Evidence links (call timestamps)</div>
+            <div class="detail-item">No black-box AI decisions</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>🧩 Integration Strategy</h4>
+        <p><span class="highlight">Native APIs</span> for Salesforce, Gong, GCal. No screen scraping. <span class="highlight">Webhooks</span> for real-time critical events.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>⚡ Processing Philosophy</h4>
+        <p><span class="highlight">Rule-based engine</span> (not black-box ML). Every score ties to a specific behavior Austin can coach on.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔍 Trust by Design</h4>
+        <p><span class="highlight">Manager override on every rec.</span> Full audit trail. Evidence links to call timestamps. No hidden scoring.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔒 Data Governance</h4>
+        <p><span class="highlight">SOC 2 compliant.</span> RBAC ensures reps see only their data. 90-day audit log for compliance.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Transparent, auditable, trustworthy</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 12 -->
+<div class="slide">
+  <div class="slide-number">11</div>
+  
+  <div class="banner">
+    <p><strong>⚙️ Task 2:</strong> Execution Plan - Gated rollout with measurable criteria and control practices at each stage</p>
+  </div>
+  
+  <h1>Execution Plan: 21-Day Pilot & Gates</h1>
+  
+  <div class="content">
+    <!-- LEFT: Timeline -->
+    <div class="timeline-panel">
+      <div class="timeline">
+        <!-- Week 1: Setup -->
+        <div class="phase">
+          <div class="phase-dot setup">1</div>
+          <div class="phase-header">
+            <div class="phase-title">Week 1: Setup & Integration</div>
+            <div class="phase-duration">Days 1-7</div>
+          </div>
+          <div class="phase-desc">
+            Connect Salesforce, Gong, GCal APIs. Configure playbook actions, risk thresholds. Train Austin + 3 pilot reps. Verify data flowing end-to-end.
+          </div>
+          <div class="gate">
+            <span class="gate-icon">✓</span>
+            <span class="gate-text">GATE: Data flowing E2E, all integrations active</span>
+          </div>
+        </div>
+        
+        <!-- Weeks 2-3: Monitor -->
+        <div class="phase">
+          <div class="phase-dot monitor">2</div>
+          <div class="phase-header">
+            <div class="phase-title">Weeks 2-3: Monitor & Iterate</div>
+            <div class="phase-duration">Days 8-21</div>
+          </div>
+          <div class="phase-desc">
+            Austin uses dashboard daily. Weekly feedback sessions. Tune risk scoring, playbook actions. Track adoption %, time savings. Collect qualitative feedback.
+          </div>
+          <div class="gate">
+            <span class="gate-icon">✓</span>
+            <span class="gate-text">GATE: 70% daily adoption, <5 critical bugs, positive NPS</span>
+          </div>
+        </div>
+        
+        <!-- Week 4: Validate -->
+        <div class="phase">
+          <div class="phase-dot validate">3</div>
+          <div class="phase-header">
+            <div class="phase-title">Week 4: Validate Outcomes</div>
+            <div class="phase-duration">Days 22-28</div>
+          </div>
+          <div class="phase-desc">
+            Compare pilot reps vs control group (4 reps not using dashboard). Measure win rate lift, sales cycle change, playbook adoption. Austin validates accuracy of insights.
+          </div>
+          <div class="gate">
+            <span class="gate-icon">✓</span>
+            <span class="gate-text">GATE: +5pp win rate OR -10% cycle time OR +20% playbook adoption</span>
+          </div>
+        </div>
+        
+        <!-- Weeks 5-8: Rollout -->
+        <div class="phase">
+          <div class="phase-dot rollout">4</div>
+          <div class="phase-header">
+            <div class="phase-title">Weeks 5-8: Full Rollout</div>
+            <div class="phase-duration">Days 29-56</div>
+          </div>
+          <div class="phase-desc">
+            Roll out to remaining 7 reps (3 per week). Weekly office hours. Monitor for regression. Establish baseline KPIs for quarterly reviews.
+          </div>
+          <div class="gate">
+            <span class="gate-icon">✓</span>
+            <span class="gate-text">GATE: Team-wide 80% adoption, no critical incidents, Austin approval</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Control Practices -->
+      <div class="control-cards">
+        <div class="control-card">
+          <div class="control-title">🚩 Control Practices</div>
+          <div class="control-list">
+            <div class="control-item">Feature flags for instant rollback</div>
+            <div class="control-item">Daily error rate monitoring</div>
+            <div class="control-item">Kill-switch for bad predictions</div>
+            <div class="control-item">Weekly stakeholder sync</div>
+          </div>
+        </div>
+        
+        <div class="control-card">
+          <div class="control-title">🔄 Trust Verification Loop</div>
+          <div class="control-list">
+            <div class="control-item">Austin spot-checks 10 deals/week</div>
+            <div class="control-item">Reps flag incorrect insights</div>
+            <div class="control-item">Accuracy log (target: >90%)</div>
+            <div class="control-item">Bi-weekly calibration sessions</div>
+          </div>
+        </div>
+        
+        <div class="control-card">
+          <div class="control-title">🎯 Go/No-Go Criteria</div>
+          <div class="control-list">
+            <div class="control-item">Gate failure = pause rollout</div>
+            <div class="control-item">Critical bug = immediate rollback</div>
+            <div class="control-item">NPS <6 = investigate blockers</div>
+            <div class="control-item">No black-box AI decisions</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- KPI Badges -->
+      <div class="kpi-badges">
+        <div class="kpi-badge">📊 70% Adoption</div>
+        <div class="kpi-badge">⏱ -30% Time</div>
+        <div class="kpi-badge">📈 +5pp Win Rate</div>
+        <div class="kpi-badge">✅ 90% Accuracy</div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>🎯 Gated Rollout Strategy</h4>
+        <p><span class="highlight">No big-bang launch.</span> 4 phases with measurable gates. Pause/rollback if criteria not met.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🧪 Control Group Design</h4>
+        <p><span class="highlight">Pilot 3 reps vs 4 control reps.</span> Compare win rate, cycle time, adoption. Proves ROI.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🔒 Risk Mitigation</h4>
+        <p><span class="highlight">Feature flags + kill-switch.</span> Daily error monitoring. Weekly stakeholder sync. Instant rollback capability.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>✅ Trust Verification</h4>
+        <p><span class="highlight">Austin spot-checks 10 deals/week.</span> Reps flag bad insights. Accuracy target: >90%. Bi-weekly calibration.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Progressive, measured, controlled</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 13 -->
+<div class="slide">
+  <div class="slide-number">12</div>
+  
+  <div class="banner">
+    <p><strong>⚙️ Task 2:</strong> Success Metrics & Validation - Clear KPIs with measurement methods and acceptance criteria</p>
+  </div>
+  
+  <h1>Success Metrics & Validation Plan</h1>
+  
+  <div class="content">
+    <!-- LEFT: Metrics -->
+    <div class="metrics-panel">
+      <div class="metrics-grid">
+        <!-- Metric 1: Time Savings -->
+        <div class="metric-card">
+          <div class="pending-badge">⏳ Pending baseline</div>
+          <div class="metric-title">⏱ Time Savings per Week</div>
+          <div class="metric-formula">
+            <div class="formula-label">Formula</div>
+            <div class="formula-text">(Baseline hrs - Current hrs) / Baseline hrs × 100</div>
+          </div>
+          <div class="metric-how">
+            <strong>How measured:</strong> Time-tracking survey before/after. Austin logs hours spent on: call reviews, 1:1 prep, pipeline analysis. Target: <strong>30% reduction</strong> (8 hrs → 5.6 hrs).
+          </div>
+        </div>
+        
+        <!-- Metric 2: Deal Velocity -->
+        <div class="metric-card">
+          <div class="pending-badge">⏳ Pending baseline</div>
+          <div class="metric-title">📈 Deal Velocity Improvement</div>
+          <div class="metric-formula">
+            <div class="formula-label">Formula</div>
+            <div class="formula-text">Median(Days to Close) - Control Group vs Pilot Group</div>
+          </div>
+          <div class="metric-how">
+            <strong>How measured:</strong> Track median sales cycle for pilot reps (using dashboard) vs control reps (not using). Baseline from CRM. Target: <strong>15% faster</strong> (42 days → 36 days).
+          </div>
+        </div>
+        
+        <!-- Metric 3: Win Rate Lift -->
+        <div class="metric-card">
+          <div class="pending-badge">⏳ Pending baseline</div>
+          <div class="metric-title">🎯 Win Rate Lift</div>
+          <div class="metric-formula">
+            <div class="formula-label">Formula</div>
+            <div class="formula-text">(Pilot Win% - Control Win%) in percentage points</div>
+          </div>
+          <div class="metric-how">
+            <strong>How measured:</strong> Compare win rates (deals won / deals closed) for pilot vs control. Baseline: 36%. Target: <strong>+3pp lift</strong> (36% → 39%). Dollar impact: ~$150K ARR.
+          </div>
+        </div>
+        
+        <!-- Metric 4: Playbook Adoption -->
+        <div class="metric-card">
+          <div class="pending-badge">⏳ Pending baseline</div>
+          <div class="metric-title">✅ Playbook Adoption Rate</div>
+          <div class="metric-formula">
+            <div class="formula-label">Formula</div>
+            <div class="formula-text">Σ(Actions Completed) / Σ(Actions Expected) × 100</div>
+          </div>
+          <div class="metric-how">
+            <strong>How measured:</strong> Track completion of playbook actions (budget qualification, multi-threading, etc.) via call transcripts. Baseline: 65%. Target: <strong>70% completion</strong>.
+          </div>
+        </div>
+      </div>
+      
+      <!-- Acceptance Criteria -->
+      <div class="acceptance-box">
+        <div class="acceptance-title">✓ Pilot Success Acceptance Criteria</div>
+        <div class="acceptance-grid">
+          <div class="acceptance-item">
+            <div class="acceptance-metric">Time Savings</div>
+            <div class="acceptance-target">≥30% reduction</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acceptance-metric">Deal Velocity</div>
+            <div class="acceptance-target">≥15% faster</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acceptance-metric">Win Rate Lift</div>
+            <div class="acceptance-target">≥+3pp increase</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acceptance-metric">Playbook Adoption</div>
+            <div class="acceptance-target">≥70% completion</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acceptance-metric">User Satisfaction</div>
+            <div class="acceptance-target">≥9/10 NPS</div>
+          </div>
+          <div class="acceptance-item">
+            <div class="acceptance-metric">Override Rate</div>
+            <div class="acceptance-target">&lt;20% overrides</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Note -->
+      <div class="note">
+        <div class="note-text">
+          <strong>Note:</strong> Baseline metrics will be collected during Week 1 setup. Control group (4 reps) will continue current workflow. Pilot group (3 reps) will use dashboard. Comparison starts Week 2. Final validation Week 4.
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT: Feature Callouts -->
+    <div class="callouts">
+      <div class="callout">
+        <h4>📊 Metric Design Principles</h4>
+        <p>Each metric has <span class="highlight">clear formula, measurement method, and threshold.</span> No ambiguity on what "success" means.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🧪 Control Group Validation</h4>
+        <p><span class="highlight">3 pilot reps vs 4 control reps.</span> Isolates dashboard impact from seasonal/market effects. Scientific validation.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>⏱ Baseline Collection</h4>
+        <p><span class="highlight">Week 1 establishes baseline.</span> Time-tracking survey + CRM historical data. Critical for before/after comparison.</p>
+      </div>
+      
+      <div class="callout">
+        <h4>🎯 Acceptance Gates</h4>
+        <p><span class="highlight">Must hit 1 of 3 core metrics</span> (time/velocity/win rate) + 70% adoption + 9/10 NPS to proceed to full rollout.</p>
+      </div>
+      
+      <div class="summary">
+        <p>Measured, validated, proven</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
