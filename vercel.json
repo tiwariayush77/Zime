@@ -2,18 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "SalesFlowCanvas/server/index.ts",
-      "use": "@vercel/node"
+      "src": "index.html",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "SalesFlowCanvas/server/index.ts"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "SalesFlowCanvas/server/index.ts"
+      "src": "/",
+      "dest": "/index.html"
     }
   ]
 }
